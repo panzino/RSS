@@ -1,0 +1,13 @@
+[3]
+[feedOne]
+url = https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564396%20600006157&IsNodeId=1&ShowDeactivatedMark=False
+item = 1600
+price = 100
+[feedTwo]
+url = https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564395&IsNodeId=1&ShowDeactivatedMark=False
+item = 1866
+price = 100
+[feedThree]
+url = http://www.rockauto.com/RSS/vehiclefeeds.php?carcode=1424269&m=wc&l=en
+item = Brake
+price = 20
