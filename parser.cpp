@@ -1,4 +1,4 @@
-#include "xmlparser.h"
+#include "parser.h"
 #include "readops.h"
 #include <rapidxml.hpp>
 #include <rapidxml_print.hpp>
@@ -7,6 +7,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <regex>
 
 using namespace rapidxml;
 
@@ -26,7 +27,7 @@ void startParse(std::vector<settings>& map, std::string fileName)
 
 																							std::cout << "Name of my first node is: " << doc.first_node()->name() << "\n";
 
-	parseXML(node);
+	parseXML(node, map[0].price);
 
 	//DELETE: placeholder
 	std::cout << map[0].price << '\n';
@@ -34,7 +35,7 @@ void startParse(std::vector<settings>& map, std::string fileName)
 }
 
 
-void parseXML(rapidxml::xml_node<> *node)
+void parseXML(rapidxml::xml_node<> *node, int price)
 {
 	//Keep recursing while the node is present
 	while (*node->name() != 0x0)
@@ -52,10 +53,12 @@ void parseXML(rapidxml::xml_node<> *node)
 
 
 		//Recurse children
-		parseXML(node->first_node(node->first_node()->name()));
+		if (node->first_node()->name() != 0x0)
+			parseXML(node->first_node(node->first_node()->name()), price);
 		
 		//Recurse siblings
-		parseXML(node->next_sibling());
+		if (node->next_sibling() != 0x0)
+			parseXML(node->next_sibling(), price);
 
 		return;
 	}
@@ -64,4 +67,27 @@ void parseXML(rapidxml::xml_node<> *node)
 																	std::cout << "Reached Null Node!" << "\n";
 
 	return;
+}
+
+
+bool regexPriceFind(std::string& str, int price)
+{
+	//Find price in our string using regex
+	//As long as the dollar tag is present we can identify price
+	//REMEMBER: to double backslashes, a single backslash is an esc. char
+	std::smatch matchPrice;
+	bool present = std::regex_match(str, matchPrice, std::regex("\\$\\d+"));
+
+	if (present == false)
+		return false;
+
+	//Convert match to number
+	std::string stringmPrice = matchPrice.str();
+	stringmPrice.erase(0,1);
+	int foundPrice = atoi(stringmPrice.c_str());
+
+	if (foundPrice < price)
+		return true;
+
+	return false;
 }

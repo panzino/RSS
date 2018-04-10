@@ -1,5 +1,5 @@
 #include "http.h"
-#include "xmlparser.h"
+#include "parser.h"
 #include "readops.h"
 #include <getopt.h>
 #include <iostream>
@@ -62,7 +62,8 @@ int main(int argc, char *argv[])
 
 
     //3. PARSE THE XML FILES
-    //FROM: xmlparser
+    //FROM: xmlparser'
+    //TODO: write a quicker string parser for small files
     startParse(map, "responses/simple.xml");
 
 

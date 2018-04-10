@@ -18,7 +18,7 @@ void readSettings(vector<settings>& map)
 	string temp;
 	string url;
 	string item;
-	short price;
+	int price;
 
 	ifstream settingsFile("settings.txt");
 

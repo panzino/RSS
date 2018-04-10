@@ -146,9 +146,9 @@ help:
 
 # tests
 
-HEADERS = http.h xmlparser.h
+HEADERS = http.h parser.h
 #class.o: class.cpp class.h
-xmlparser.o: xmlparser.cpp xmlparser.h $(HEADERS)
+parser.o: parser.cpp parser.h $(HEADERS)
 http.o: http.cpp http.h $(HEADERS)
 readops.o: readops.cpp readops.h $(HEADERS)
 main.o: main.cpp $(HEADERS)
