@@ -24,6 +24,8 @@ void startParse(std::vector<settings>& map, std::string fileName)
 	//Now we loop through all the nodes
 	rapidxml::xml_node<> *node = doc.first_node(doc.first_node()->name());
 
+																							std::cout << "Name of my first node is: " << doc.first_node()->name() << "\n";
+
 	parseXML(node);
 
 	//DELETE: placeholder
@@ -34,8 +36,8 @@ void startParse(std::vector<settings>& map, std::string fileName)
 
 void parseXML(rapidxml::xml_node<> *node)
 {
-	//Might have to function this up and use recursion....
-	while (node != NULL)
+	//Keep recursing while the node is present
+	while (*node->name() != 0x0)
 	{
 		std::string nodeName = node->name();
 		std::string nodeValue = node->value();
@@ -48,21 +50,18 @@ void parseXML(rapidxml::xml_node<> *node)
 																	std::cout << "Node attribute is: " << atrValue << std::endl;
 		}
 
-		if (!node.first_node()->name().compare(NULL))
-		{
-			rapidxml::xml_node<> *childNode = node.first_node(node.first_node()->name());
 
-			while (childNode != NULL)
+		//Recurse children
+		parseXML(node->first_node(node->first_node()->name()));
+		
+		//Recurse siblings
+		parseXML(node->next_sibling());
 
-		}
-
-
-
-   		node = node->next_sibling();
+		return;
 	}
 
-																	std::cout << "Name of my first node is: " << doc.first_node()->name() << "\n";
-																	std::cout << "First node has value: " << node ->value() << "\n";
+											
+																	std::cout << "Reached Null Node!" << "\n";
 
 	return;
 }
