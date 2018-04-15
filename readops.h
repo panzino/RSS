@@ -1,11 +1,11 @@
 #ifndef PROGRAM_OPTIONS_H
 #define PROGRAM_OPTIONS_H
 
+
 #include <string>
 #include <unordered_map>
 #include <iostream>
 #include <vector>
-
 
 //A struct to hold the values read in from settings
 struct settings
@@ -33,13 +33,10 @@ public:
 
 };
 
-
 //Requires: the map holding our settings from settings.txt
 //Modifies: the map holding our settings
 //Effects: opens settings.txt and reads data into it
 void readSettings(std::vector<settings>& map);
-
-
 
 
 #endif

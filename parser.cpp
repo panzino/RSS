@@ -1,3 +1,8 @@
+//////////// PURPOSE //////////////////////
+//This file is designed to parse the 
+//    xml file from the RSS feed
+//    to see if any items have a better price
+
 #include "parser.h"
 #include "readops.h"
 #include <rapidxml.hpp>
@@ -11,18 +16,14 @@
 
 using namespace rapidxml;
 
-
-//TODO: Rewrite the loop to use recursion
-void parse::startParse(std::vector<settings>& map, std::string fileName)
+bool parse::startParse(int priceIn, bool verbose)
 {
 	//Set price global variable
-	std::cout << map[0].price << std::endl;
-
-	price = 80;
+	price = priceIn;
 	betterPrice = false;
 
 	//Open our filestream
-	std::ifstream fileStream(fileName);
+	std::ifstream fileStream("responses/output.xml");
 
 	rapidxml::file<> xmlfile(fileStream);
 	rapidxml::xml_document<> doc;
@@ -31,21 +32,29 @@ void parse::startParse(std::vector<settings>& map, std::string fileName)
 	//Now we loop through all the nodes
 	rapidxml::xml_node<> *node = doc.first_node(doc.first_node()->name());
 
-																							std::cout << "Name of my first node is: " << doc.first_node()->name() << "\n";
+	if (verbose)
+		std::cout << "Name of my first node is: " << doc.first_node()->name() << "\n";
 
-	parseXML(node);
+	parseXML(node, verbose);
 
 	if (betterPrice == true)
-		std::cout << "A better price has been found!" << std::endl;
+	{
+		return true;
+
+		if (verbose)
+			std::cout << "A better price has been found!" << "\n";
+	}
 	else
-		std::cout << "No better price" << std::endl;
+	{
+		return false;
 
-
-	return;
+		if (verbose)
+			std::cout << "No better price" << "\n";
+	}
 }
 
 
-void parse::parseXML(rapidxml::xml_node<> *node)
+void parse::parseXML(rapidxml::xml_node<> *node, bool verbose)
 {
 	if (betterPrice == true)
 		return;
@@ -60,23 +69,25 @@ void parse::parseXML(rapidxml::xml_node<> *node)
 		{
 			std::string atrValue = attr->value();
 			regexPriceFind(atrValue);
-																	std::cout << "Node attribute is: " << atrValue << std::endl;
+
+			if (verbose)
+				std::cout << "Node attribute is: " << atrValue << "\n";
 		}
 
 
 		//Recurse children
 		if (node->first_node()->name() != 0x0)
-			parseXML(node->first_node(node->first_node()->name()));
+			parseXML(node->first_node(node->first_node()->name()), verbose);
 		
 		//Recurse siblings
 		if (node->next_sibling() != 0x0)
-			parseXML(node->next_sibling());
+			parseXML(node->next_sibling(), verbose);
 
 		return;
 	}
 
-											
-																	std::cout << "Reached Null Node!" << "\n";
+	if (verbose)						
+		std::cout << "Reached Null Node!" << "\n";
 
 	return;
 }
@@ -84,6 +95,7 @@ void parse::parseXML(rapidxml::xml_node<> *node)
 
 void parse::regexPriceFind(std::string& str)
 {
+
 	//Find price in our string using regex
 	//As long as the dollar tag is present we can identify price
 	//REMEMBER: to double backslashes, a single backslash is an esc. char

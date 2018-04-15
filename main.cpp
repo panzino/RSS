@@ -1,6 +1,6 @@
+#include "readops.h"
 #include "http.h"
 #include "parser.h"
-#include "readops.h"
 #include "email.h"
 #include <getopt.h>
 #include <iostream>
@@ -13,6 +13,7 @@ using namespace std;
 static struct option longopts[] = 
 {
     {"help", no_argument, nullptr, 'h'},
+    {"verbose", no_argument, nullptr, 'v'},
     {nullptr, 0, nullptr, 0}
 };
 
@@ -26,6 +27,7 @@ int main(int argc, char *argv[])
     ////////START GETOPS /////////////////
     /////////////////////////////////////
     int index = 0;
+    bool verbose = false;
     char c;
 
     //I'm keeping getops because I might one day decide to utilize it more
@@ -42,6 +44,8 @@ int main(int argc, char *argv[])
                         cout << "-r / --run: Run the program" << '\n';
                         cout << "-h / --help: Describe program and options" << '\n';
                         return 0;
+            case 'v':   //Set verbose to true
+                        verbose = true;
         }
     }
     /////////////////////////////////////
@@ -57,21 +61,35 @@ int main(int argc, char *argv[])
     vector<settings> map;
     readSettings(map);
 
-    //2. GET RSS XML FILES
-    //FROM: http
-    //TODO: Refactor code from C to C++
-    sendGET(map);
+    //Cache our responses so we only send one email
+    //Execute tracks if we need to send an email
+    //Send tracks which items we need to send an email for
+    bool execute = false;
+    vector<bool> send;
+    send.reserve(map.size());
 
-    //3. PARSE THE XML FILES
-    //FROM: xmlparser'
-    //TODO: write a quicker string parser for small files
-    parse start = parse();
-    start.startParse(map, "responses/simple.xml");
+    for (unsigned short i = 0; i < map.size(); ++i)
+    {
+        //2. GET RSS XML FILES
+        //FROM: http
+        //TODO: Refactor code from C to C++
+        sendGET(map[i]);
 
-    //4. IF REQUIRED- SEND EMAIL
-    //FROM: sendemail
-    //TODO: Refactor code from C to C++
-    sendEmail();
+        //3. PARSE THE XML FILES
+        //FROM: xmlparser'
+        //TODO: write a quicker string parser for small files
+        parse start = parse();
+        send[i] = start.startParse(map[i].price, verbose);
+
+        execute += send[i];
+    }
+
+        //4. IF REQUIRED- SEND EMAIL
+        //FROM: sendemail
+        //TODO: Refactor code from C to C++
+        if (execute)
+            sendEmail(send);
+    
 
     return 0;
 }

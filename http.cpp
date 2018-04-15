@@ -1,3 +1,10 @@
+//////////// PURPOSE //////////////////////
+//FROM: libcurl example library
+//This file is designed to send a HTTP 
+//    GET request based on the URL that
+//    is provided in settings.txt
+//TODO: Rewrite the file using C++ syntax
+
 #include "http.h"
 #include "readops.h"
 #include <stdio.h>
@@ -13,19 +20,18 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
     return written;
 }
 
-void sendGET(vector<settings>& map)
+void sendGET(settings& set)
 {
     CURL *curl;
     FILE *fp;
     CURLcode res;
 
-    //Required for C/C++ string compatability
-    const char *url = "https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564396%20600006157&IsNodeId=1&ShowDeactivatedMark=False";
+    //Required for C/C++ string compatability in cUrl
+    //Not exactly safe as this is a pointer to original string
+    //    so if original string dies...this dies too
+    const char* url = set.url.c_str();
 
-    //DELETE
-    cout << map[0].url << endl;
-
-    char outfilename[FILENAME_MAX] = "responses/output2.xml";
+    char outfilename[FILENAME_MAX] = "responses/output.xml";
     curl = curl_easy_init();
     if (curl) 
     {

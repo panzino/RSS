@@ -7,17 +7,16 @@
 #include <curl/include/curl/curl.h>
 #include <string>
 
-
 //Requires:
-//Modifies: 
-//Effects: 
+//Modifies: the file pointed to
+//Effects: writes the data from the request to a file
 size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream);
 
-//Requires: the map holding our settings from settings.txt
-//Modifies: the map holding our settings
-//Effects: downloads .xml RSS feed from URLs in map
-void sendGET(std::vector<settings>& map);
-
+//Requires: the settings from one item in settings.txt
+//Modifies: output.xml
+//Effects: downloads .xml RSS feed from URLs in settings variable
+//TODO: rewrite this code to work w/ XML and HTML
+void sendGET(settings& set);
 
 
 #endif

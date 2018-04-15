@@ -1,5 +1,8 @@
+//////////// PURPOSE //////////////////////
+//This file is designed to parse the 
+//    user configured settings contained
+//    in settings.txt
 //I will eventually get to optimizing this file...
-//  because it is crap
 
 #include "readops.h"
 #include <string>
@@ -9,7 +12,6 @@
 #include <vector>
 
 using namespace std;
-
 
 void readSettings(vector<settings>& map)
 {	
@@ -22,14 +24,15 @@ void readSettings(vector<settings>& map)
 
 	ifstream settingsFile("settings.txt");
 
+	//find how many loops we need to perform
 	settingsFile >> temp; 
 	loops = temp[1] - 48;
 
-	//Background stuff...
+	//reserve memory before allocation
 	map.reserve(loops);
 	
 	//pull data from settings.txt
-	for (int i = 0; i < loops; ++i)
+	for (unsigned short i = 0; i < loops; ++i)
 	{
 		settingsFile >> temp >> temp >> temp;
 		settingsFile >> url;
