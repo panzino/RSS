@@ -4,12 +4,7 @@
 #include <curl/include/curl/curl.h>
 #include <string>
 
-/* For older cURL versions you will also need 
-#include <curl/types.h>
-#include <curl/easy.h>
-*/
 
-/*
 using namespace std;
 
 size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream) 
@@ -24,9 +19,13 @@ void sendGET(vector<settings>& map)
     FILE *fp;
     CURLcode res;
 
-    char *url = "http://localhost/aaa.txt";
+    //Required for C/C++ string compatability
+    const char *url = "https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564396%20600006157&IsNodeId=1&ShowDeactivatedMark=False";
 
-    char outfilename[FILENAME_MAX] = "C:\\bbb.txt";
+    //DELETE
+    cout << map[0].url << endl;
+
+    char outfilename[FILENAME_MAX] = "responses/output2.xml";
     curl = curl_easy_init();
     if (curl) 
     {
@@ -35,6 +34,7 @@ void sendGET(vector<settings>& map)
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
         res = curl_easy_perform(curl);
+
         //always cleanup
         curl_easy_cleanup(curl);
         fclose(fp);
@@ -42,4 +42,3 @@ void sendGET(vector<settings>& map)
 
     return;
 }
-*/

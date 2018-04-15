@@ -10,22 +10,30 @@
 #include <regex>
 
 
-//Requires: the map holding our settings from settings.txt
-//Modifies: the map holding our settings
-//Effects: parses XML setting
-void startParse(std::vector<settings>& map, std::string fileName);
+//Easier to just use a global variable with the recurssive function
+class parse
+{
 
-//Requires: the top node
-//Modifies: nothing
-//Effects: traverses the RSS nodes
-void parseXML(rapidxml::xml_node<> *node, int price);
+private:
+	int price;
+	bool betterPrice;
 
-//Requires: the price of the item
-//Modifies: nothing
-//Effects: searches the parsed strings for the dollar value
-bool regexPriceFind(std::string str, int price);
+public:
+	//Requires: the map holding our settings from settings.txt
+	//Modifies: the map holding our settings
+	//Effects: parses XML setting
+	void startParse(std::vector<settings>& map, std::string fileName);
 
+	//Requires: the top node
+	//Modifies: nothing
+	//Effects: traverses the RSS nodes
+	void parseXML(rapidxml::xml_node<> *node);
 
+	//Requires: the price of the item
+	//Modifies: nothing
+	//Effects: searches the parsed strings for the dollar value
+	void regexPriceFind(std::string& str);
+};
 
 
 

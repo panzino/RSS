@@ -1,6 +1,7 @@
 #include "http.h"
 #include "parser.h"
 #include "readops.h"
+#include "email.h"
 #include <getopt.h>
 #include <iostream>
 #include <string>
@@ -43,7 +44,6 @@ int main(int argc, char *argv[])
                         return 0;
         }
     }
-
     /////////////////////////////////////
     //////////////END GETOPS ///////////
     ////////////////////////////////////
@@ -59,16 +59,19 @@ int main(int argc, char *argv[])
 
     //2. GET RSS XML FILES
     //FROM: http
-
+    //TODO: Refactor code from C to C++
+    sendGET(map);
 
     //3. PARSE THE XML FILES
     //FROM: xmlparser'
     //TODO: write a quicker string parser for small files
-    startParse(map, "responses/simple.xml");
-
+    parse start = parse();
+    start.startParse(map, "responses/simple.xml");
 
     //4. IF REQUIRED- SEND EMAIL
     //FROM: sendemail
+    //TODO: Refactor code from C to C++
+    sendEmail();
 
     return 0;
 }

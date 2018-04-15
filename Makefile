@@ -25,8 +25,10 @@ PROJECTFILE = main.cpp
 TAR = RSS.tar.gz
 
 #Default Flags
-CXXFLAGS = -std=c++14 -Wall -Werror -Wextra -pedantic
-# CXXFLAGS = -std=c++14 -Wall -Wextra -pedantic 
+#CXXFLAGS = -std=c++14 -Wall -Werror -Wextra -pedantic
+CXXFLAGS = -std=c++14
+LDFLAGS = -L/usr/include/lib
+LDLIBS = -lcurl
 
 # make release - will compile "all" with $(CXXFLAGS) and the -O3 flag
 #				 also defines NDEBUG so that asserts will not check
@@ -49,9 +51,9 @@ $(EXECUTABLE): $(OBJECTS)
 ifeq ($(EXECUTABLE), executable)
 	@echo Edit EXECUTABLE variable in Makefile.
 	@echo Using default a.out.
-	$(CXX) $(CXXFLAGS) $(OBJECTS)
+	$(CXX) $(LDFLAGS) $(CXXFLAGS) $(OBJECTS) $(LDLIBS)
 else
-	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $(EXECUTABLE)
+	$(CXX) $(LDFLAGS) $(CXXFLAGS) $(OBJECTS) $(LDLIBS) -o $(EXECUTABLE)
 endif
 
 # Automatically generate any build rules for test*.cpp files
@@ -146,11 +148,12 @@ help:
 
 # tests
 
-HEADERS = http.h parser.h
+HEADERS = http.h parser.h readops.h email.h
 #class.o: class.cpp class.h
 parser.o: parser.cpp parser.h $(HEADERS)
 http.o: http.cpp http.h $(HEADERS)
 readops.o: readops.cpp readops.h $(HEADERS)
+email.o: email.cpp email.h $(HEADERS)
 main.o: main.cpp $(HEADERS)
 
 ######################

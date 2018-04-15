@@ -13,8 +13,14 @@ using namespace rapidxml;
 
 
 //TODO: Rewrite the loop to use recursion
-void startParse(std::vector<settings>& map, std::string fileName)
+void parse::startParse(std::vector<settings>& map, std::string fileName)
 {
+	//Set price global variable
+	std::cout << map[0].price << std::endl;
+
+	price = 80;
+	betterPrice = false;
+
 	//Open our filestream
 	std::ifstream fileStream(fileName);
 
@@ -27,38 +33,44 @@ void startParse(std::vector<settings>& map, std::string fileName)
 
 																							std::cout << "Name of my first node is: " << doc.first_node()->name() << "\n";
 
-	parseXML(node, map[0].price);
+	parseXML(node);
 
-	//DELETE: placeholder
-	std::cout << map[0].price << '\n';
+	if (betterPrice == true)
+		std::cout << "A better price has been found!" << std::endl;
+	else
+		std::cout << "No better price" << std::endl;
+
+
 	return;
 }
 
 
-void parseXML(rapidxml::xml_node<> *node, int price)
+void parse::parseXML(rapidxml::xml_node<> *node)
 {
+	if (betterPrice == true)
+		return;
+
 	//Keep recursing while the node is present
 	while (*node->name() != 0x0)
 	{
-		std::string nodeName = node->name();
 		std::string nodeValue = node->value();
-																	std::cout << "Node name is: " << nodeName << std::endl;
-																	std::cout << "Node value is: " << nodeValue << std::endl;
+		regexPriceFind(nodeValue);
 
 		for (rapidxml::xml_attribute<> *attr = node->first_attribute();attr; attr = attr->next_attribute())
 		{
 			std::string atrValue = attr->value();
+			regexPriceFind(atrValue);
 																	std::cout << "Node attribute is: " << atrValue << std::endl;
 		}
 
 
 		//Recurse children
 		if (node->first_node()->name() != 0x0)
-			parseXML(node->first_node(node->first_node()->name()), price);
+			parseXML(node->first_node(node->first_node()->name()));
 		
 		//Recurse siblings
 		if (node->next_sibling() != 0x0)
-			parseXML(node->next_sibling(), price);
+			parseXML(node->next_sibling());
 
 		return;
 	}
@@ -70,16 +82,16 @@ void parseXML(rapidxml::xml_node<> *node, int price)
 }
 
 
-bool regexPriceFind(std::string& str, int price)
+void parse::regexPriceFind(std::string& str)
 {
 	//Find price in our string using regex
 	//As long as the dollar tag is present we can identify price
 	//REMEMBER: to double backslashes, a single backslash is an esc. char
 	std::smatch matchPrice;
-	bool present = std::regex_match(str, matchPrice, std::regex("\\$\\d+"));
+	bool present = std::regex_search(str, matchPrice, std::regex("\\$\\d+"));
 
 	if (present == false)
-		return false;
+		return;
 
 	//Convert match to number
 	std::string stringmPrice = matchPrice.str();
@@ -87,7 +99,10 @@ bool regexPriceFind(std::string& str, int price)
 	int foundPrice = atoi(stringmPrice.c_str());
 
 	if (foundPrice < price)
-		return true;
+	{
+		betterPrice = true;
+		return;
+	}
 
-	return false;
+	return;
 }
