@@ -65,8 +65,7 @@ int main(int argc, char *argv[])
     //Execute tracks if we need to send an email
     //Send tracks which items we need to send an email for
     bool execute = false;
-    vector<bool> send;
-    send.reserve(map.size());
+    vector<short> send;
 
     for (unsigned short i = 0; i < map.size(); ++i)
     {
@@ -79,7 +78,7 @@ int main(int argc, char *argv[])
         //FROM: xmlparser'
         //TODO: write a quicker string parser for small files
         parse start = parse();
-        send[i] = start.startParse(map[i].price, verbose);
+        send.push_back(start.startParse(map[i].price, verbose));
 
         execute += send[i];
 
