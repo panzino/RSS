@@ -82,13 +82,15 @@ int main(int argc, char *argv[])
         send[i] = start.startParse(map[i].price, verbose);
 
         execute += send[i];
+
+        cout << flush;
     }
 
-        //4. IF REQUIRED- SEND EMAIL
-        //FROM: sendemail
-        //TODO: Refactor code from C to C++
-        if (execute)
-            sendEmail(send);
+    //4. IF REQUIRED- SEND EMAIL
+    //FROM: sendemail
+    //TODO: Refactor code from C to C++
+    if (execute)
+        sendEmail(map, send, verbose);
     
 
     return 0;

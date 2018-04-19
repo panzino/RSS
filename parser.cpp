@@ -39,17 +39,17 @@ bool parse::startParse(int priceIn, bool verbose)
 
 	if (betterPrice == true)
 	{
-		return true;
-
 		if (verbose)
 			std::cout << "A better price has been found!" << "\n";
+
+		return true;
 	}
 	else
 	{
-		return false;
-
 		if (verbose)
 			std::cout << "No better price" << "\n";
+
+		return false;
 	}
 }
 
