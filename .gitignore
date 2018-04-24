@@ -10,6 +10,7 @@ email.cpp
 *.exe
 *.o
 *.so
+*.xml
 
 # Packages #
 ############
