@@ -18,7 +18,7 @@ using namespace rapidxml;
 
 bool parse::startParse(int priceIn, bool verbose)
 {
-	//Set price global variable
+	//Set price variable
 	price = priceIn;
 	betterPrice = false;
 

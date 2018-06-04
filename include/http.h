@@ -16,7 +16,7 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream);
 //Modifies: output.xml
 //Effects: downloads .xml RSS feed from URLs in settings variable
 //TODO: rewrite this code to work w/ XML and HTML
-void sendGET(settings& set, bool verbose);
+void sendGET(const char* url, const char* extension, bool verbose);
 
 
 #endif

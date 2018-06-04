@@ -154,12 +154,13 @@ help:
 
 # tests
 
-HEADERS = http.h parser.h readops.h email.h
+HEADERS = http.h parser.h readops.h email.h fixer.h
 
 parser.o: parser.cpp parser.h $(HEADERS)
 http.o: http.cpp http.h $(HEADERS)
 readops.o: readops.cpp readops.h $(HEADERS)
 email.o: email.cpp email.h $(HEADERS)
+fixer.o: fixer.cpp fixer.h $(HEADERS)
 main.o: main.cpp $(HEADERS)
 
 ######################

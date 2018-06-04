@@ -1,5 +1,6 @@
 #include "readops.h"
 #include "http.h"
+#include "fixer.h"
 #include "parser.h"
 #include "email.h"
 #include <getopt.h>
@@ -69,13 +70,19 @@ int main(int argc, char *argv[])
 
     for (unsigned short i = 0; i < map.size(); ++i)
     {
+        const char* ext = (map[i].ext).c_str();
+
         //2. GET RSS XML FILES
         //FROM: http
         //TODO: Refactor code from C to C++
-        sendGET(map[i], verbose);
+        sendGET((map[i].url).c_str(), ext, verbose);
+
+        //2.b FIX POSSIBLE FORMATTING FROM GET RESPONSES
+        //FROM: tidy
+        //fixFormatting(ext,verbose);
 
         //3. PARSE THE XML FILES
-        //FROM: xmlparser'
+        //FROM: xmlparser
         //TODO: write a quicker string parser for small files
         parse start = parse();
         send.push_back(start.startParse(map[i].price, verbose));

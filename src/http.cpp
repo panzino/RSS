@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <curl/curl.h>
 #include <string>
+#include <cstring>
 
 
 using namespace std;
@@ -20,18 +21,20 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
     return written;
 }
 
-void sendGET(settings& set, bool verbose)
+
+//const char*: required for C/C++ string compatability in cUrl
+//Not exactly safe as this is a pointer to original string
+//    so if original string dies...this dies too
+void sendGET(const char* url, const char* extension, bool verbose)
 {
     CURL *curl;
     FILE *fp;
     CURLcode res;
 
-    //Required for C/C++ string compatability in cUrl
-    //Not exactly safe as this is a pointer to original string
-    //    so if original string dies...this dies too
-    const char* url = set.url.c_str();
+    //const char* url = set.url.c_str();
+    char outfilename[FILENAME_MAX] = "../responses/output.";
+    strcat (outfilename, extension);
 
-    char outfilename[FILENAME_MAX] = "../responses/output.xml";
     curl = curl_easy_init();
     if (curl) 
     {

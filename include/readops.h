@@ -14,6 +14,7 @@ public:
 
     std::string url; 
     std::string item;
+    std::string ext;
     int price;
 
     //Requires: Nothing
@@ -24,10 +25,11 @@ public:
    	//Requires: Nothing
     //Modifies: settings struct
     //Effects: constructor for settings struct
-    settings(std::string urlIn, std::string itemIn, int priceIn)
+    settings(std::string urlIn, std::string itemIn, std::string extIn, int priceIn)
     {
        url = urlIn;
        item = itemIn;
+       ext = extIn;
        price = priceIn;
     }
 
