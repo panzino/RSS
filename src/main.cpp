@@ -75,17 +75,17 @@ int main(int argc, char *argv[])
         //2. GET RSS XML FILES
         //FROM: http
         //TODO: Refactor code from C to C++
-        sendGET((map[i].url).c_str(), ext, verbose);
+        //sendGET((map[i].url).c_str(), ext, verbose);
 
         //2.b FIX POSSIBLE FORMATTING FROM GET RESPONSES
         //FROM: tidy
-        //fixFormatting(ext,verbose);
+        fixFormatting(ext,verbose);
 
         //3. PARSE THE XML FILES
         //FROM: xmlparser
         //TODO: write a quicker string parser for small files
         parse start = parse();
-        send.push_back(start.startParse(map[i].price, verbose));
+        send.push_back(start.startParse(ext, map[i].price, verbose));
 
         execute += send[i];
 

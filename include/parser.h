@@ -22,7 +22,7 @@ public:
 	//Requires: the map holding our settings from settings.txt
 	//Modifies: the map holding our settings
 	//Effects: parses XML setting
-	bool startParse(int priceIn, bool verbose);
+	bool startParse(const char* extension, int priceIn, bool verbose);
 
 	//Requires: the top node
 	//Modifies: nothing

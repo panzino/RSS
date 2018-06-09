@@ -16,13 +16,15 @@
 
 using namespace rapidxml;
 
-bool parse::startParse(int priceIn, bool verbose)
+bool parse::startParse(const char* extension, int priceIn, bool verbose)
 {
 	//Set price variable
 	price = priceIn;
 	betterPrice = false;
 
 	//Open our filestream
+/*	char fullFileName[FILENAME_MAX] = "../responses/output.";
+    strcat (fullFileName, extension);*/
 	std::ifstream fileStream("../responses/output.xml");
 
 	rapidxml::file<> xmlfile(fileStream);
@@ -30,7 +32,7 @@ bool parse::startParse(int priceIn, bool verbose)
 	doc.parse<0>(xmlfile.data());
 
 	//Now we loop through all the nodes
-	rapidxml::xml_node<> *node = doc.first_node(doc.first_node()->name());
+	rapidxml::xml_node<> *node = doc.first_node();
 
 	if (verbose)
 		std::cout << "Name of my first node is: " << doc.first_node()->name() << "\n";
@@ -51,6 +53,9 @@ bool parse::startParse(int priceIn, bool verbose)
 
 		return false;
 	}
+
+	//Always free the document and memory pool
+	doc.clear();
 }
 
 
@@ -58,6 +63,13 @@ void parse::parseXML(rapidxml::xml_node<> *node, bool verbose)
 {
 	if (betterPrice == true)
 		return;
+
+/*std::cout << "Node name is: " << node->name() << std::endl;
+std::cout << "Node address is: " << node << std::endl;
+std::cout << "First node address is: " << node->first_node() << std::endl;
+std::cout << "Last node address is: " << node->last_node() << std::endl;
+std::cout << "Sibling node address is: " << node->next_sibling() << std::endl;
+std::cout << std::endl;*/
 
 	//Keep recursing while the node is present
 	while (*node->name() != 0x0)
@@ -74,13 +86,20 @@ void parse::parseXML(rapidxml::xml_node<> *node, bool verbose)
 				std::cout << "Node attribute is: " << atrValue << "\n";
 		}
 
+/*std::cout << "Node name is: " << node->name() << std::endl;
+std::cout << "Node address is: " << node << std::endl;
+std::cout << "First node address is: " << node->first_node() << std::endl;
+std::cout << "Sibling node address is: " << node->next_sibling() << std::endl;
+std::cout << std::endl;*/
 
 		//Recurse children
-		if (node->first_node()->name() != 0x0)
-			parseXML(node->first_node(node->first_node()->name()), verbose);
+		// '0' is requred because rapidXML will occassionally interpret NULL as 0
+		if (node->first_node() != 0x0 || node->first_node() != 0)
+			parseXML(node->first_node(), verbose);
 		
 		//Recurse siblings
-		if (node->next_sibling() != 0x0)
+		// '0' is requred because rapidXML will occassionally interpret NULL as 0	
+		if (node->next_sibling() != 0x0 || node->next_sibling() != 0)
 			parseXML(node->next_sibling(), verbose);
 
 		return;

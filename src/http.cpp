@@ -32,8 +32,9 @@ void sendGET(const char* url, const char* extension, bool verbose)
     CURLcode res;
 
     //const char* url = set.url.c_str();
-    char outfilename[FILENAME_MAX] = "../responses/output.";
-    strcat (outfilename, extension);
+/*    char outfilename[FILENAME_MAX] = "../responses/output.";
+    strcat (outfilename, extension);*/
+    char outfilename[FILENAME_MAX] = "../responses/GET_Response.txt";
 
     curl = curl_easy_init();
     if (curl) 

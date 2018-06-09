@@ -5,20 +5,20 @@
 #include <errno.h>
 #include <fstream>
 #include <string>
-
+#include <iostream>
 
 void fixFormatting(const char* extension, bool verbose)
 {
-	char fullFileName[FILENAME_MAX] = "../responses/output.";
-    strcat (fullFileName, extension);
-
-	std::ifstream inputFile (fullFileName);
+	//I decided to use fstream because I might as well use the C++ methods
+	//std::ifstream inputFile ("../responses/GET_Response.xml");
+	std::ifstream inputFile ("../responses/GET_Response.xml");
 	std::string inputString;
 
 	inputFile.seekg(0, std::ios::end);   
 	inputString.reserve(inputFile.tellg());
 	inputFile.seekg(0, std::ios::beg);
 
+	//Read input data from input file
 	inputString.assign((std::istreambuf_iterator<char>(inputFile)),
             	std::istreambuf_iterator<char>());
 
@@ -29,10 +29,7 @@ void fixFormatting(const char* extension, bool verbose)
 	int rc = -1;
 	bool ok;
 
-	//Open file stream
-	FILE* ofile;
-	ofile = fopen (fullFileName, "w");
-
+	std::ofstream outFile("../responses/output.xml");
 
 	//Init doc
 	TidyDoc tdoc = tidyCreate();
@@ -54,21 +51,30 @@ void fixFormatting(const char* extension, bool verbose)
   	if ( rc >= 0 )
     		rc = tidySaveBuffer(tdoc, &output);
 
-    if (verbose)
-    {
-	  	if ( rc >= 0 )
-	  	{
-	    		if ( rc > 0 )
-	      			printf("\nDiagnostics:\n\n%s", errbuf.bp );
-	    			fprintf(ofile, "\nAnd here is the result:\n\n%s", output.bp );
-	  	}
-	  	else
-	    		printf("A severe error (%d) occurred.\n", rc );
-	}
+
+  	if ( rc >= 0 )
+  	{
+		if (verbose)
+		{
+			printf("\nDiagnostics:\n\n%s", errbuf.bp );
+		}
+
+		outFile.write((char*)output.bp, output.size);
+  	}   
+  	else
+		if (verbose)
+		{
+			printf("A severe error (%d) occurred.\n", rc );
+		}
 
   	tidyBufFree(&output );
   	tidyBufFree(&errbuf );
   	tidyRelease(tdoc );
+
+
+  	//Close file
+  	inputFile.close();
+  	outFile.close();
 
   	//For future error handling implementation
   	//return rc;
