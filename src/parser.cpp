@@ -35,21 +35,36 @@ bool parse::startParse(const char* extension, int priceIn, bool verbose)
 	rapidxml::xml_node<> *node = doc.first_node();
 
 	if (verbose)
-		std::cout << "Name of my first node is: " << doc.first_node()->name() << "\n";
+		std::cout << "Name of my first node is: " << doc.first_node()->name() << '\n';
 
-	parseXML(node, verbose);
+	///////////////////////HTML CODE///////////////////////////////////////
+	//We need a different behavior for native XML and HTML converted to XML
+	std::vector<std::string> whitelist;
+
+	if (strcmp(extension, "xml") == 0)
+	{
+		parseXML(node, verbose);
+	}
+	else
+	{
+		whitelist = loadHTML();
+		parseHTML(whitelist, node,verbose);
+	}
+
+	//////////////////////////////////////////////////////////////////////
+
 
 	if (betterPrice == true)
 	{
 		if (verbose)
-			std::cout << "A better price has been found!" << "\n";
+			std::cout << "A better price has been found!" << '\n';
 
 		return true;
 	}
 	else
 	{
 		if (verbose)
-			std::cout << "No better price" << "\n";
+			std::cout << "No better price" << '\n';
 
 		return false;
 	}
@@ -64,13 +79,6 @@ void parse::parseXML(rapidxml::xml_node<> *node, bool verbose)
 	if (betterPrice == true)
 		return;
 
-/*std::cout << "Node name is: " << node->name() << std::endl;
-std::cout << "Node address is: " << node << std::endl;
-std::cout << "First node address is: " << node->first_node() << std::endl;
-std::cout << "Last node address is: " << node->last_node() << std::endl;
-std::cout << "Sibling node address is: " << node->next_sibling() << std::endl;
-std::cout << std::endl;*/
-
 	//Keep recursing while the node is present
 	while (*node->name() != 0x0)
 	{
@@ -83,7 +91,7 @@ std::cout << std::endl;*/
 			regexPriceFind(atrValue);
 
 			if (verbose)
-				std::cout << "Node attribute is: " << atrValue << "\n";
+				std::cout << "Node attribute is: " << atrValue << '\n';
 		}
 
 /*std::cout << "Node name is: " << node->name() << std::endl;
@@ -101,6 +109,79 @@ std::cout << std::endl;*/
 		// '0' is requred because rapidXML will occassionally interpret NULL as 0	
 		if (node->next_sibling() != 0x0 || node->next_sibling() != 0)
 			parseXML(node->next_sibling(), verbose);
+
+		return;
+	}
+
+	if (verbose)						
+		std::cout << "Reached Null Node!" << '\n';
+
+	return;
+}
+
+
+std::vector<std::string> parse::loadHTML()
+{
+	//Get list of possible places price might be located in the HTML document
+	std::ifstream inputFile ("../http_search_list.txt");
+
+	std::vector<std::string> whitelist;
+	std::string helper;
+
+	while (inputFile >> helper)
+	{
+		inputFile >> helper;
+		whitelist.emplace_back(helper);
+	}
+
+	inputFile.close();
+
+	return whitelist;
+}
+
+
+//Code is very similar to parseXML
+//	we simply have to check our whitelist before proceeding
+void parse::parseHTML(std::vector<std::string>& whitelist, rapidxml::xml_node<> *node, bool verbose)
+{
+	if (betterPrice == true)
+		return;
+
+	//Keep recursing while the node is present
+	while (*node->name() != 0x0)
+	{
+		//Node name doesn't matter here...
+		std::string nodeValue = node->value();
+		regexPriceFind(nodeValue);
+
+		//Attribute does
+		for (rapidxml::xml_attribute<> *attr = node->first_attribute();attr; attr = attr->next_attribute())
+		{
+			std::string atrValue = attr->value();
+
+			//This block is the only block that is different between parseHTML and parseXML
+			for (short i = 0; i < 0; ++i)
+			{
+				if (atrValue.compare(whitelist[i]));
+				{
+					regexPriceFind(atrValue);
+					break;
+				}
+			}
+
+			if (verbose)
+				std::cout << "Node attribute is: " << atrValue << "\n";
+		}
+
+		//Recurse children
+		// '0' is requred because rapidXML will occassionally interpret NULL as 0
+		if (node->first_node() != 0x0 || node->first_node() != 0)
+			parseHTML(whitelist, node->first_node(), verbose);
+		
+		//Recurse siblings
+		// '0' is requred because rapidXML will occassionally interpret NULL as 0	
+		if (node->next_sibling() != 0x0 || node->next_sibling() != 0)
+			parseHTML(whitelist, node->next_sibling(), verbose);
 
 		return;
 	}

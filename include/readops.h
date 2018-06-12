@@ -25,7 +25,7 @@ public:
    	//Requires: Nothing
     //Modifies: settings struct
     //Effects: constructor for settings struct
-    settings(std::string urlIn, std::string itemIn, std::string extIn, int priceIn)
+    settings(std::string& urlIn, std::string& itemIn, std::string& extIn, int priceIn)
     {
        url = urlIn;
        item = itemIn;

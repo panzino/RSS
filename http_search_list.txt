@@ -1,0 +1,3 @@
+Amazon: a-size-base a-color-base
+Ebay: s-item__price
+Walmart: aria-label

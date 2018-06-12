@@ -44,18 +44,18 @@
 //WARNING: because of cUrl you cannot convert strings to c strings
  //    it is not possible and will cause undefined behavior due to 
  //    cUrl memory allocation
-std::vector<const char*> formatMessage(std::vector<settings>& map, std::vector<short> send)
+std::vector<const char*> formatMessage(std::vector<settings>& map, std::vector<short>& send)
 {
     std::vector<const char*> message;
     message.reserve(10);
-    message.push_back("Date: Mon, 16 April 2018 14:52:29 +1100\r\n");
-    message.push_back("To: " TO "\r\n");
-    message.push_back("From: " FROM " (Mail Bot)\r\n");
-    message.push_back("Cc: " CC " (Placeholder)\r\n");
-    message.push_back("Message-ID: <dcd7cb36-11db-487a-9f3a-e652a9458efd@rssmailbot@gmail.com>\r\n");
-    message.push_back("Subject: Price Alert!\r\n");
+    message.emplace_back("Date: Mon, 16 April 2018 14:52:29 +1100\r\n");
+    message.emplace_back("To: " TO "\r\n");
+    message.emplace_back("From: " FROM " (Mail Bot)\r\n");
+    message.emplace_back("Cc: " CC " (Placeholder)\r\n");
+    message.emplace_back("Message-ID: <dcd7cb36-11db-487a-9f3a-e652a9458efd@rssmailbot@gmail.com>\r\n");
+    message.emplace_back("Subject: Price Alert!\r\n");
     //empty line to divide headers from body, see RFC5322
-    message.push_back("\r\n");
+    message.emplace_back("\r\n");
 
 
     //Now we add our items w/ price alerts to the message body
@@ -71,9 +71,9 @@ std::vector<const char*> formatMessage(std::vector<settings>& map, std::vector<s
     {
         if (send[i])
         {
-            message.push_back("Item:\r\n");
-            message.push_back((*(&map[i].item)).c_str());
-            message.push_back("\r\n");
+            message.emplace_back("Item:\r\n");
+            message.emplace_back((*(&map[i].item)).c_str());
+            message.emplace_back("\r\n");
         }
     }
 
@@ -114,7 +114,7 @@ static size_t payload_source(void *ptr, size_t size, size_t nmemb, void *userp)
 }
 
 
-void sendEmail(std::vector<settings>& map, std::vector<short> send, bool verbose)
+void sendEmail(std::vector<settings>& map, std::vector<short>& send, bool verbose)
 {
     CURL *curl;
     CURLcode res = CURLE_OK;

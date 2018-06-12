@@ -59,6 +59,7 @@ int main(int argc, char *argv[])
     //FROM: readops and settings.txt
     //TODO: Rewrite the settings importation code to work with Boost.program_options
     //TODO: OR rewrite the code so it's prettier
+
     vector<settings> map;
     readSettings(map);
 
@@ -79,7 +80,7 @@ int main(int argc, char *argv[])
 
         //2.b FIX POSSIBLE FORMATTING FROM GET RESPONSES
         //FROM: tidy
-        fixFormatting(ext,verbose);
+        //fixFormatting(verbose);
 
         //3. PARSE THE XML FILES
         //FROM: xmlparser
@@ -97,7 +98,6 @@ int main(int argc, char *argv[])
     //TODO: Refactor code from C to C++
     if (execute)
         sendEmail(map, send, verbose);
-    
 
     return 0;
 }

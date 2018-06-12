@@ -7,7 +7,7 @@
 #include <string>
 #include <iostream>
 
-void fixFormatting(const char* extension, bool verbose)
+void fixFormatting(bool verbose)
 {
 	//I decided to use fstream because I might as well use the C++ methods
 	//std::ifstream inputFile ("../responses/GET_Response.xml");
@@ -47,25 +47,17 @@ void fixFormatting(const char* extension, bool verbose)
 	if (rc >= 0)
    	 	rc = tidyRunDiagnostics(tdoc);
   	if ( rc > 1 )                           
-    		rc = ( tidyOptSetBool(tdoc, TidyForceOutput, yes) ? rc : -1 );
+    	rc = ( tidyOptSetBool(tdoc, TidyForceOutput, yes) ? rc : -1 );
   	if ( rc >= 0 )
-    		rc = tidySaveBuffer(tdoc, &output);
+    	rc = tidySaveBuffer(tdoc, &output);
+    if (rc >= 0)
+    	outFile.write((char*)output.bp, output.size);
 
-
-  	if ( rc >= 0 )
-  	{
-		if (verbose)
-		{
-			printf("\nDiagnostics:\n\n%s", errbuf.bp );
-		}
-
-		outFile.write((char*)output.bp, output.size);
-  	}   
-  	else
-		if (verbose)
-		{
-			printf("A severe error (%d) occurred.\n", rc );
-		}
+    if (verbose)
+    	if (rc >= 0)
+    		printf("\nDiagnostics:\n\n%s", errbuf.bp );
+    	else
+    		printf("A severe error (%d) occurred.\n", rc );
 
   	tidyBufFree(&output );
   	tidyBufFree(&errbuf );

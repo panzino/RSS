@@ -12,7 +12,7 @@
 //Requires:
 //Modifies: 
 //Effects: creates formated message to send via email
-std::vector<const char*> formatMessage(std::vector<settings>& map, std::vector<short> send);
+std::vector<const char*> formatMessage(std::vector<settings>& map, std::vector<short>& send);
 
 //Requires:
 //Modifies: 
@@ -22,7 +22,7 @@ static size_t payload_source(void *ptr, size_t size, size_t nmemb, void *userp);
 //Requires: vector of what items have a better price
 //Modifies: nothing
 //Effects: sends an email using SMTP settings through Gmail
-void sendEmail(std::vector<settings>& map, std::vector<short> send, bool verbose);
+void sendEmail(std::vector<settings>& map, std::vector<short>& send, bool verbose);
 
 
 //This struct is a method of preserving data
@@ -41,7 +41,7 @@ public:
     //Requires: Nothing
     //Modifies: variables struct
     //Effects: constructor for creating variables struct
-    variables(std::vector<settings>& mapIn, std::vector<short> sendIn)
+    variables(std::vector<settings>& mapIn, std::vector<short>& sendIn)
     {
         message = formatMessage(mapIn, sendIn);
         linesRead = 0;
