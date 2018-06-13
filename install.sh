@@ -1,20 +1,18 @@
 #Install curl
-sudo apt-get install autoconf automake libtool nroff perl
-git clone https://github.com/curl/curl.git
-cd curl
-./buildconf
-./configure
-make
-sudo make install
+sudo apt-get install autoconf automake libtool
+git clone https://github.com/curl/curl.git /home/$(logname)/curl
+/home/$(logname)/curl/buildconf
+/home/$(logname)/curl/configure
+/home/$(logname)/curl make
+sudo /home/$(logname)/curl make install
 
 #Install Tidy
-cd ..
-git clone https://github.com/htacg/tidy-html5.git
+git clone https://github.com/htacg/tidy-html5.git /home/$(logname)
 cd tidy-html5
 cd build/cmake
-cmake ../.. -DCMAKE_BUILD_TYPE=Release
-make
-sudo make install
+/home/$(logname)/tidy-html5/built/cmake cmake ../.. -DCMAKE_BUILD_TYPE=Release
+/home/$(logname)/tidy-html5/built/cmakemake
+sudo /home/$(logname)/tidy-html5/built/cmake sudo make install
 
 #Install rapidxml
 sudo apt-get install librapidxml-dev
