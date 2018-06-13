@@ -47,8 +47,13 @@ int main(int argc, char *argv[])
                         return 0;
             case 'v':   //Set verbose to true
                         verbose = true;
+                        goto label;
+            case 'r':   //Some getop versions need this
+                        goto label;
         }
     }
+
+    label:
     /////////////////////////////////////
     //////////////END GETOPS ///////////
     ////////////////////////////////////
