@@ -1,23 +1,23 @@
 #Install curl
-sudo apt-get install autoconf automake libtool
+apt-get install autoconf automake libtool
 git clone https://github.com/curl/curl.git /home/$(logname)/curl
 cd ..
-cd curl?
+cd curl
 ./buildconf
 ./configure
 make
-sudo make install
+make install
 
 #Install Tidy
 git clone https://github.com/htacg/tidy-html5.git /home/$(logname)/tidy
-cd tidy?
+cd tidy
 cd build/cmake
 cmake ../.. -DCMAKE_BUILD_TYPE=Release
 make
 sudo make install
 
 #Install rapidxml
-sudo apt-get install librapidxml-dev
+apt-get install librapidxml-dev
 
 #Make the source code
 cd ..
