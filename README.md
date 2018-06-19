@@ -47,18 +47,18 @@ There are two user-configured files that must be set before RSS can function:
 
 ### settings.txt
 
-*Example file:*
-*1*		 [3]
-*2*		 [feedOne]
-*3*		 url = https://www.ebay.com/sch/i.html?_nkw=f3-1600c9d-16grsl&_sop=15
-*4*		 item = 1600
-*5*		 ext = html
-*6*		 price = 80
-*7*		 [feedTwo]
-*8*		 url = https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564396%20600006157&IsNodeId=1&ShowDeactivatedMark=False
-*9*		 item = 1600
-*10*		 ext = xml
-*11*		 price = 1000
+*Example file:*  
+   *1*		 [3]  
+   *2*		 [feedOne]  
+   *3*		 url = https://www.ebay.com/sch/i.html?_nkw=f3-1600c9d-16grsl&_sop=15  
+   *4*		 item = 1600  
+   *5*		 ext = html  
+   *6*		 price = 80  
+   *7*		 [feedTwo]  
+   *8*		 url = https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564396%20600006157&IsNodeId=1&ShowDeactivatedMark=False  
+   *9*		 item = 1600  
+   *10*		 ext = xml  
+   *11*		 price = 1000  
 
 ### http_search_list.txt
 
