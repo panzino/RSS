@@ -46,9 +46,8 @@ There are two user-configured files that must be set before RSS can function:
 
 
 ### settings.txt
-
 <dl>
-  <dt>Definition &npsp; &npsp; &npsp; list </dt>
+  <dt>Definition &nbsp; &nbsp; &nbsp; list </dt>
   <dd>Is something people use sometimes.</dd>
 
   <dt>Markdown in HTML</dt>
@@ -56,11 +55,9 @@ There are two user-configured files that must be set before RSS can function:
 </dl>
 
 
-
-
 *Example file:*  
-   *1* &npsp; &npsp; [3]
-   *2* &npsp; &npsp; [feedOne]  
+   *1* &nbsp; &nbsp; [3]
+   *2* &nbsp; &nbsp; [feedOne]  
    *3*		 url = https://www.ebay.com/sch/i.html?_nkw=f3-1600c9d-16grsl&_sop=15  
    *4*		 item = 1600  
    *5*		 ext = html  
