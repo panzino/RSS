@@ -41,13 +41,15 @@ ___
 ## Configuring RSS
 
 There are two user-configured files that must be set before RSS can function:   
-   [settings.txt][1]  
-   [http_search_list.txt][2]  
+   [settings.txt][100]  
+   [http_search_list.txt][105]  
 
 
 ### settings.txt
 
-*Example file:*  
+This file designates the products that the consumer is watching for price drops. It holds four descriptors: url, item, ext, and price. These will be covered later. 
+
+*Example file*
    *1* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [3]  
    *2* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [feedOne]    
    *3* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; url = https://www.ebay.com/sch/i.html?_nkw=f3-1600c9d-16grsl&_sop=15  
@@ -59,6 +61,27 @@ There are two user-configured files that must be set before RSS can function:
    *9* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; item = 1600  
    *10* &nbsp; &nbsp; &nbsp; &nbsp; ext = xml  
    *11* &nbsp; &nbsp; &nbsp; &nbsp; price = 1000  
+
+Going line by line:  
+
+
+
+
+| Line | Strongly Formatted* | Description                                                                                                    |
+| -----|:-------------------:| --------------------------------------------------------------------------------------------------------------:|
+| 1    | yes                 | Indicates how many items you are watching. This number must be correct and must be typed in this format: `[x]` |
+| 2    |                     |   $12                           |
+| 3    |                     |    $1                           |
+
+
+*Indicates the format must be followed EXACTLY
+
+
+Line 1: Indicates how many items you are watching. This number must be CORRECT and must be typed in this format:  `[x]`
+
+
+
+
 
 ### http_search_list.txt
 
@@ -87,13 +110,13 @@ ___
 ___
 ## Dependencies
 
-  - [Tidy-HTML5][3]  
-  - [Curl][4]  
-  - [Rapidxml][5]  
+  - [Tidy-HTML5][110]  
+  - [Curl][115]  
+  - [Rapidxml][120]  
 
 
-[1]: settings.txt
-[2]: http_search_list.txt
-[3]: https://github.com/htacg/tidy-html5
-[4]: https://github.com/curl/curl
-[5]: http://rapidxml.sourceforge.net/manual.html
+[100]: settings.txt
+[105]: http_search_list.txt
+[110]: https://github.com/htacg/tidy-html5
+[115]: https://github.com/curl/curl
+[120]: http://rapidxml.sourceforge.net/manual.html
