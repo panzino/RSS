@@ -46,27 +46,19 @@ There are two user-configured files that must be set before RSS can function:
 
 
 ### settings.txt
-<dl>
-  <dt>Definition &nbsp; &nbsp; &nbsp; list </dt>
-  <dd>Is something people use sometimes.</dd>
-
-  <dt>Markdown in HTML</dt>
-  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
-</dl>
-
 
 *Example file:*  
-   *1* &nbsp; &nbsp; [3]
-   *2* &nbsp; &nbsp; [feedOne]  
-   *3*		 url = https://www.ebay.com/sch/i.html?_nkw=f3-1600c9d-16grsl&_sop=15  
-   *4*		 item = 1600  
-   *5*		 ext = html  
-   *6*		 price = 80  
-   *7*		 [feedTwo]  
-   *8*		 url = https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564396%20600006157&IsNodeId=1&ShowDeactivatedMark=False  
-   *9*		 item = 1600  
-   *10*		 ext = xml  
-   *11*		 price = 1000  
+   *1* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [3]  
+   *2* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [feedOne]    
+   *3* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; url = https://www.ebay.com/sch/i.html?_nkw=f3-1600c9d-16grsl&_sop=15  
+   *4* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; item = 1600  
+   *5* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ext = html  
+   *6* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; price = 80  
+   *7* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [feedTwo]  
+   *8* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; url = https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564396%20600006157&IsNodeId=1&ShowDeactivatedMark=False  
+   *9* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; item = 1600  
+   *10* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ext = xml  
+   *11* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; price = 1000  
 
 ### http_search_list.txt
 
