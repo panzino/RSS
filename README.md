@@ -21,7 +21,7 @@ ___
 	```
    sudo ./install.sh
 	```
-
+	
    This will install the following packages and libraries:  
    -autoconf  
    -automake  
@@ -47,13 +47,25 @@ There are two user-configured files that must be set before RSS can function:
 
 ### settings.txt
 
+*Example file:*
+1. [3]
+2. [feedOne]
+3. url = https://www.ebay.com/sch/i.html?_nkw=f3-1600c9d-16grsl&_sop=15
+4. item = 1600
+5. ext = html
+6. price = 80
+7. [feedTwo]
+8. url = https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564396%20600006157&IsNodeId=1&ShowDeactivatedMark=False
+9. item = 1600
+10. ext = xml
+11. price = 1000
 
 ### http_search_list.txt
 
 
 ### other files
 
-
+	
 
 
 ___
@@ -69,7 +81,8 @@ Other UNIX systems might support this software. These are the environments that 
 ___
 ## Version Log
 
-1.0 (6/19/2018) - Software and test-suite are functional but are not user-friendly. Future versions will aim to reduce complexity of use
+1. 6/19/2018  
+   Software and test-suite are functional but not user-friendly. Future versions will aim to increase usability
 
 ___
 ## Dependencies
