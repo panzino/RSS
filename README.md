@@ -8,33 +8,34 @@ ___
 0. This software is currently only designed for unix systems and is solely tested on Ubuntu and Armbian. 
 
 1. Download the latest source from the Git server: 
-	'''
-	git clone https://github.com/panzino/RSS.git
-	'''
+	```
+   git clone https://github.com/panzino/RSS.git
+	```
 2. Enter RSS source directory:
-	'''
-	cd RSS
-	'''
-2. Change install script permission:
-	'''
-	chmod 744 install.sh
-	'''
-2. Run the install script:
-	'''
-	sudo ./install.sh
-	'''
-	This will install the following packages and libraries:
-	-autoconf
-	-automake
-	-libtool
-	-make
-	-cmake
-	-gcc
-	-g++
-	-cron
-	-curl
-	-tidy-html5
-	-rapidxml
+	```
+   cd RSS
+	```
+3. Change install script permission:
+	```
+   chmod 744 install.sh
+	```
+4. Run the install script:
+	```
+   sudo ./install.sh
+	```
+
+   This will install the following packages and libraries:  
+   -autoconf  
+   -automake  
+   -libtool  
+   -make  
+   -cmake  
+   -gcc  
+   -g++  
+   -cron  
+   -curl  
+   -tidy-html5  
+   -rapidxml  
 
 3. Currently, RSS is automatically configured to run once per hour. 
 
