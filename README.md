@@ -48,7 +48,7 @@ There are two user-configured files that must be set before RSS can function:
 ### settings.txt
 
 *Example file:*  
-   *1*		 [3]  
+   *1*                         [3]  
    *2*		 [feedOne]  
    *3*		 url = https://www.ebay.com/sch/i.html?_nkw=f3-1600c9d-16grsl&_sop=15  
    *4*		 item = 1600  
