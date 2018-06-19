@@ -41,10 +41,10 @@ ___
 ## Configuring RSS
 
 There are two user-configured files that must be set before RSS can function: 
-...[settings.txt][1]..
-...[http_search_list.txt][2]..
+   [settings.txt][1]  
+   [http_search_list.txt][2]  
 
-___
+
 ### settings.txt
 
 
@@ -74,13 +74,13 @@ ___
 ___
 ## Dependencies
 
-	- [Tidy-HTML5][3]
-	- [Curl][4]
-	- [Rapidxml][5]
+  - [Tidy-HTML5][3]  
+  - [Curl][4]  
+  - [Rapidxml][5]  
 
 
-	[1]: ../blob/master/settings.txt
-	[2]: ../blob/master/http_search_list.txt
-	[3]: https://github.com/htacg/tidy-html5
-	[4]: https://github.com/curl/curl
-	[5]: http://rapidxml.sourceforge.net/manual.html
+[1]: settings.txt
+[2]: http_search_list.txt
+[3]: https://github.com/htacg/tidy-html5
+[4]: https://github.com/curl/curl
+[5]: http://rapidxml.sourceforge.net/manual.html
