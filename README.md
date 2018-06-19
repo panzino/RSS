@@ -48,7 +48,7 @@ There are two user-configured files that must be set before RSS can function:
 ### settings.txt
 
 <dl>
-  <dt>Definition list</dt>
+  <dt>Definition &npsp; &npsp; &npsp; list </dt>
   <dd>Is something people use sometimes.</dd>
 
   <dt>Markdown in HTML</dt>
