@@ -40,7 +40,7 @@ ___
 ___
 ## Configuring RSS
 
-There are two user-configured files that must be set before RSS can function: 
+There are two user-configured files that must be set before RSS can function:   
    [settings.txt][1]  
    [http_search_list.txt][2]  
 
