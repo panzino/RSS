@@ -57,8 +57,8 @@ There are two user-configured files that must be set before RSS can function:
    *7* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [feedTwo]  
    *8* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; url = https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564396%20600006157&IsNodeId=1&ShowDeactivatedMark=False  
    *9* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; item = 1600  
-   *10* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ext = xml  
-   *11* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; price = 1000  
+   *10* &nbsp; &nbsp; &nbsp; &nbsp; ext = xml  
+   *11* &nbsp; &nbsp; &nbsp; &nbsp; price = 1000  
 
 ### http_search_list.txt
 
