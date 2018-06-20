@@ -62,9 +62,7 @@ DO NOT RUN THE INSTALL SCRIPT WHEN UPDATING!
 ___
 ## Configuring RSS
 
-There are two user-configured files that must be set before RSS can function:   
-   [settings.txt][100]  
-   [http_search_list.txt][105]  
+There are two user-configured files that must be set before RSS can function: [settings.txt][100] and [http_search_list.txt][105]   
 
 
 ### settings.txt
@@ -85,7 +83,7 @@ This file designates the products that the consumer is watching for price drops.
    *11* &nbsp; &nbsp; &nbsp; &nbsp; price = 1000  
 
 
-Going line by line:  
+
 
 | Line     | Strongly Formatted* | Description                                                                 | Example              |
 | -------- |:-------------------:| :---------------------------------------------------------------------------| :--------------------|
@@ -97,7 +95,7 @@ Going line by line:
 | 6 | yes | This is the last of our four descriptors. This is the price you want to watch this item for. If the online price is found to be lower than this price, you will be sent an email alert | In this example our price is $20 
 | 7 - 11 | x | Lines for the next feed follow the same rules as for the first feed | This is solely included to provide an example with two feeds |
 
-*Indicates the format must be followed EXACTLY
+*Indicates format must be followed EXACTLY
 
 
 ### http_search_list.txt
@@ -105,10 +103,11 @@ Going line by line:
 This file designates where to look in the HTML webpages of URLs you are price watching on
 
 *Example file*  
-   *1* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Amazon: a-size-base a-color-base
+   *1* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Amazon: a-size-base a-color-base a-offscreen  
    *2* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Ebay: s-item__price   
-   *3* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Walmart: aria-label 
+   *3* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Walmart: aria-label  
 
+Look through the source file [here][200] for a product that costs $12.99. You will find it next to an HTML tag named *a-offscreen*. Therefore, you must add that tag to this file in the appropriately named category. This tells the RSS source code where to look for the price tag in the HTML from Amazon. To add a different website follow the formatting in this file. Multiple tags are seperated by white space.
 
 ### other files
 
@@ -144,3 +143,4 @@ ___
 [110]: https://github.com/htacg/tidy-html5
 [115]: https://github.com/curl/curl
 [120]: http://rapidxml.sourceforge.net/manual.html
+[200]: responses/amazon_light_bulb_example.html
