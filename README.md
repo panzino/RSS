@@ -49,13 +49,13 @@ There are two user-configured files that must be set before RSS can function:
 
 This file designates the products that the consumer is watching for price drops. It holds four descriptors: *url*, *item*, *ext*, and *price*. These will be covered later. 
 
-*Example file*
+*Example file*  
    *1* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [2]  
    *2* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [feedOne]    
-   *3* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; url = https://www.amazon.com/s?url=search-alias%3Daps&field-keywords=light+bulbs
-   *4* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; item = 1600  
+   *3* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; url = https://www.amazon.com/s?url=search-alias%3Daps&field-keywords=light+bulbs  
+   *4* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; item = light_bulbs  
    *5* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ext = html  
-   *6* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; price = 80  
+   *6* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; price = 20
    *7* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [feedTwo]  
    *8* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; url = https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564396%20600006157&IsNodeId=1&ShowDeactivatedMark=False  
    *9* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; item = 1600  
@@ -66,15 +66,18 @@ This file designates the products that the consumer is watching for price drops.
 Going line by line:  
 
 | Line | Strongly Formatted* | Description                                                                 | Example              |
-| -----|:-------------------:| ---------------------------------------------------------------------------:| --------------------:|
+| -----|:-------------------:| :---------------------------------------------------------------------------| :--------------------|
 | 1 | yes | Indicates how many items you are watching. This number must be correct and must be typed in this format: `[x]` | In this example we are watching 2 items |
 | 2 | no | Just a title for the next four lines. So you know which four descriptors belong together | In this example, this is our first feed |
-| 3 | yes | This is the first of our four descriptors. This is the URL to the webpage that contains the search you want this code to run. This code is not smart and you have to specify where to look for a product you want to price watch for. Improper search results can lead to *stream pollution* which will be covered later | In this example we are running a search for light bulbs at Amazon |
+| 3 | yes | This is the first of our four descriptors. This is the URL to the webpage that contains the search you want this code to run. This code is not smart and you have to specify where to look for a product you want to price watch for. Improper search results can lead to *stream pollution* which will be covered later. Ensure the `url = ` is preserved. The `=` must have a space on both sides | In this example we are running a search for light bulbs at Amazon |
+| 4 | yes | This is the second of our four descriptors. This is the description of the product you are price watching for. The descriptor must be one word. Use underscores/*_* in place of spaces | In this example our descriptor is for *light bulbs* |
+| 5 | yes | This is the third of our four descriptors. This is the file type of the source URL. In most cases this will be an HTML site. Unless you are using an RSS feed. In these cases choose *XML* as the parsing is faster. If you don't know which to pick choose *html* | In this example our website is an HTML site |
+| 6 | yes | This is the last of our four descriptors. This is the price you want to watch this item for. If the online price is found to be lower than this price, you will be sent an email alert | In this example our price is $20 
+| 7 - 11 | x | Lines for the next feed follow the same rules as for the first feed | This is solely included to provide an example with two feeds |
 
 *Indicates the format must be followed EXACTLY
 
 
-Line 1: Indicates how many items you are watching. This number must be CORRECT and must be typed in this format:  `[x]`
 
 
 
