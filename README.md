@@ -47,10 +47,10 @@ There are two user-configured files that must be set before RSS can function:
 
 ### settings.txt
 
-This file designates the products that the consumer is watching for price drops. It holds four descriptors: url, item, ext, and price. These will be covered later. 
+This file designates the products that the consumer is watching for price drops. It holds four descriptors: *url*, *item*, *ext*, and *price*. These will be covered later. 
 
 *Example file*
-   *1* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [3]  
+   *1* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [2]  
    *2* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; [feedOne]    
    *3* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; url = https://www.ebay.com/sch/i.html?_nkw=f3-1600c9d-16grsl&_sop=15  
    *4* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; item = 1600  
@@ -62,17 +62,14 @@ This file designates the products that the consumer is watching for price drops.
    *10* &nbsp; &nbsp; &nbsp; &nbsp; ext = xml  
    *11* &nbsp; &nbsp; &nbsp; &nbsp; price = 1000  
 
+
 Going line by line:  
 
-
-
-
-| Line | Strongly Formatted* | Description                                                                                                    |
-| -----|:-------------------:| --------------------------------------------------------------------------------------------------------------:|
-| 1    | yes                 | Indicates how many items you are watching. This number must be correct and must be typed in this format: `[x]` |
-| 2    |                     |   $12                           |
+| Line | Strongly Formatted* | Description                                                                 | Example              |
+| -----|:-------------------:| ---------------------------------------------------------------------------:| --------------------:|
+| 1    | yes                 | Indicates how many items you are watching. This number must be correct and must be typed in this format: `[x]` | In this example we are watching 2 items |
+| 2    | no                  |                            |
 | 3    |                     |    $1                           |
-
 
 *Indicates the format must be followed EXACTLY
 
