@@ -1,56 +1,11 @@
-[11]
+[2]
 [feedOne]
-url = https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR0.TRC0.A0.H0.Xeas+100%25+whey+protein+5lb.TRS1.TSS0&_nkw=eas+100%25+whey+protein+5lb&_sacat=0&LH_TitleDesc=0&_sop=15&_osacat=0&_odkw=eas+100+whey+protein+5lb&LH_BIN=1&LH_TitleDesc=0
-item = EAS_Whey_Protein
+url = https://www.amazon.com/s?url=search-alias%3Daps&field-keywords=light+bulbs
+item = light_bulbs
 ext = html
-price = 30
+price = 20
 [feedTwo]
-url = https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313.TR2.TRC0.A0.H0.XEAS+100%25+whey.TRS0.TSS0&_nkw=Optimum+Nutrition+Performance+Whey+4.3lb&_sacat=0&LH_TitleDesc=0&_sop=15&_osacat=0&_odkw=Optimum+Nutrition+Performance+Whey+4lb&LH_BIN=1&LH_TitleDesc=0
-item = ON_Performance_Whey
-ext = html
-price = 30
-[feedThree]
-url = https://www.ebay.com/sch/i.html?_from=R40&_trksid=m570.l1313&_nkw=xiaomi+70mai+-ipx7&_sacat=0&LH_TitleDesc=0&_sop=15&_osacat=0&_odkw=xiaomi+70mai&LH_BIN=1
-item = Xiaomi_70_Mai
-ext = html
-price = 32
-[feedFour]
-url = https://www.walmart.com/search/?query=optimum%20nutrition%20gold%20standard%20100%25%20whey%204.3lb%20-1lb&cat_id=0
-item = ON_Performance_Whey
-ext = html
-price = 30
-[feedFive]
-url = https://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Daps&field-keywords=optimum+nutrition+whey+protein+4.3lb&rh=i%3Aaps%2Ck%3Aoptimum+nutrition+whey+protein+4.3lb
-item = ON_Performance_Whey
-ext = html
-price = 30
-[feedSix]
-url = https://www.walmart.com/search/?cat_id=976760_1166769_7458180_5532610&facet=form%3APowders%7C%7Ctype%3AProtein+Drinks&grid=true&query=eas+100%25+whey+protein+5lb&sort=price_low#searchProductResult
-item = ON_Performance_Whey
-ext = html
-price = 30
-[feedSeven]
-url = https://www.ledgerwallet.com/products/ledger-nano-s
-item = Ledger_Nano
-ext = html
-price = 60
-[feedEight]
-url = https://detroit.craigslist.org/search/cto?query=toyota+prius&srchType=T&hasPic=1&condition=20&condition=30&auto_title_status=1
-item = Prius
-ext = html
-price = 5000
-[feedNine]
-url = https://www.rockauto.com/en/parts/denso,3121,spark+plug,7212
-item = Copper_SPlug
-ext = html
-price = 1
-[feedTen]
-url = https://www.rockauto.com/en/parts/ngk,2756,spark+plug,7212
-item = Copper_SPlug
-ext = html
-price = 1
-[feedEleven]
-url = https://www.rockauto.com/en/parts/ngk,7418,spark+plug,7212
-item = Copper_SPlug
-ext = html
-price = 7
+url = https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564396%20600006157&IsNodeId=1&ShowDeactivatedMark=False
+item = 1600
+ext = xml
+price = 1000
