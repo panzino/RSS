@@ -29,7 +29,7 @@ mv rapid* /usr/local/include
 cd ..
 cd ..
 cd ..
-cd RSS/src
+cd price_tracker/src
 make
 #------------------------------------------------------
 

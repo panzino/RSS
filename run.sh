@@ -1,2 +1,2 @@
-cd /home/dan/RSS/
+cd /home/$(logname)/price_tracker/
 ./RSS --run
