@@ -74,6 +74,10 @@ std::vector<const char*> formatMessage(std::vector<settings>& map, std::vector<s
             message.emplace_back("Item:\r\n");
             message.emplace_back((*(&map[i].item)).c_str());
             message.emplace_back("\r\n");
+
+            message.emplace_back("Url:\r\n");
+            message.emplace_back((*(&map[i].url)).c_str());
+            message.emplace_back("\r\n");
         }
     }
 

@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <iostream>
 #include <vector>
+#include <sstream>
 
 //A struct to hold the values read in from settings
 struct settings

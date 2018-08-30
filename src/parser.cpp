@@ -23,8 +23,6 @@ bool parse::startParse(const char* extension, int priceIn, bool verbose)
 	betterPrice = false;
 
 	//Open our filestream
-/*	char fullFileName[FILENAME_MAX] = "../responses/output.";
-    strcat (fullFileName, extension);*/
 	std::ifstream fileStream("../responses/output.xml");
 
 	rapidxml::file<> xmlfile(fileStream);
@@ -50,7 +48,6 @@ bool parse::startParse(const char* extension, int priceIn, bool verbose)
 		whitelist = loadHTML();
 		parseHTML(whitelist, node,verbose);
 	}
-
 	//////////////////////////////////////////////////////////////////////
 
 
@@ -93,12 +90,6 @@ void parse::parseXML(rapidxml::xml_node<> *node, bool verbose)
 			if (verbose)
 				std::cout << "Node attribute is: " << atrValue << '\n';
 		}
-
-/*std::cout << "Node name is: " << node->name() << std::endl;
-std::cout << "Node address is: " << node << std::endl;
-std::cout << "First node address is: " << node->first_node() << std::endl;
-std::cout << "Sibling node address is: " << node->next_sibling() << std::endl;
-std::cout << std::endl;*/
 
 		//Recurse children
 		// '0' is requred because rapidXML will occassionally interpret NULL as 0
@@ -160,7 +151,7 @@ void parse::parseHTML(std::vector<std::string>& whitelist, rapidxml::xml_node<> 
 			std::string atrValue = attr->value();
 
 			//This block is the only block that is different between parseHTML and parseXML
-			for (short i = 0; i < 0; ++i)
+			for (short i = 0; i < whitelist.size(); ++i)
 			{
 				if (atrValue.compare(whitelist[i]));
 				{

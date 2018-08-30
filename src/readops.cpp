@@ -10,6 +10,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -26,8 +27,7 @@ void readSettings(vector<settings>& map)
 	ifstream settingsFile("../settings.txt");
 
 	//find how many loops we need to perform
-	settingsFile >> temp; 
-	loops = temp[1] - 48;
+	settingsFile >> loops;
 
 	//reserve memory before allocation
 	map.reserve(loops);

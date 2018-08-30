@@ -25,18 +25,16 @@ size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream)
 //const char*: required for C/C++ string compatability in cUrl
 //Not exactly safe as this is a pointer to original string
 //    so if original string dies...this dies too
-void sendGET(const char* url, const char* extension, bool verbose)
+void sendGET(const char* url, bool verbose)
 {
     CURL *curl;
     FILE *fp;
     CURLcode res;
 
-    //const char* url = set.url.c_str();
-/*    char outfilename[FILENAME_MAX] = "../responses/output.";
-    strcat (outfilename, extension);*/
     char outfilename[FILENAME_MAX] = "../responses/GET_Response.txt";
 
     curl = curl_easy_init();
+
     if (curl) 
     {
         fp = fopen(outfilename,"wb");
@@ -44,25 +42,25 @@ void sendGET(const char* url, const char* extension, bool verbose)
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
 
-	//Verbose output for debugging
-	if (verbose)
-		curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
+        //Verbose output for debugging
+        if (verbose)
+            curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
 
-	//Send Message
+        //Send Message
         res = curl_easy_perform(curl);
 
-	if (verbose)
-	{
-	    //Back to Verbose Mode
-	    char *buf;
-	    curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, buf);
+        if (verbose)
+        {
+	       //Back to Verbose Mode
+	       char *buf;
+	       curl_easy_setopt(curl, CURLOPT_ERRORBUFFER, buf);
 
-	    if (res != CURLE_OK)
-	    {
-	 	    fprintf(stderr, "curl_easy_perfor() failed: %s\n", curl_easy_strerror(res));
-	  	    fprintf(stderr, buf);
-	    }
-	}
+	       if (res != CURLE_OK)
+	       {
+	 	        fprintf(stderr, "curl_easy_perfor() failed: %s\n", curl_easy_strerror(res));
+	  	        fprintf(stderr, buf);
+	       }
+        }
 
         //always cleanup
         curl_easy_cleanup(curl);
