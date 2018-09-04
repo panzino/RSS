@@ -24,6 +24,7 @@ void fixFormatting(bool verbose)
 		
 		//Conver to XML
 		ok = tidyOptSetBool(tdoc, TidyXmlOut, yes);
+		ok = tidyOptSetBool(tdoc, TidyXmlTags, yes);
 
 		//Error handling
 		if (ok)
@@ -58,6 +59,7 @@ void fixFormatting(bool verbose)
 		
 		//Conver to XML
 		ok = tidyOptSetBool(tdoc, TidyXmlOut, yes);
+		ok = tidyOptSetBool(tdoc, TidyXmlTags, yes);
 
 		//Error handling
 		if (rc >= 0)
