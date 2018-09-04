@@ -3,6 +3,10 @@
 //    xml file from the RSS feed
 //    to see if any items have a better price
 
+
+//Version 3.0: Insitituted vector<string> to loop through results
+
+
 #include "parser.h"
 #include "readops.h"
 #include <rapidxml.hpp>
@@ -15,6 +19,25 @@
 #include <regex>
 
 using namespace rapidxml;
+
+
+
+void parse::loadHTML()
+{
+	//Get list of possible places price might be located in the HTML document
+	std::ifstream inputFile ("../http_search_list.txt");
+
+	while (inputFile >> helper)
+	{
+		inputFile >> helper;
+		whitelist.emplace_back(helper);
+	}
+
+	inputFile.close();
+
+	return;
+}
+
 
 bool parse::startParse(const char* extension, int priceIn, bool verbose)
 {
@@ -37,17 +60,7 @@ bool parse::startParse(const char* extension, int priceIn, bool verbose)
 
 	///////////////////////HTML CODE///////////////////////////////////////
 	//We need a different behavior for native XML and HTML converted to XML
-	std::vector<std::string> whitelist;
-
-	if (strcmp(extension, "xml") == 0)
-	{
-		parseXML(node, verbose);
-	}
-	else
-	{
-		whitelist = loadHTML();
-		parseHTML(whitelist, node,verbose);
-	}
+	parseXML(node, verbose);
 	//////////////////////////////////////////////////////////////////////
 
 
@@ -73,23 +86,28 @@ bool parse::startParse(const char* extension, int priceIn, bool verbose)
 
 void parse::parseXML(rapidxml::xml_node<> *node, bool verbose)
 {
-	if (betterPrice == true)
-		return;
-
 	//Keep recursing while the node is present
 	while (*node->name() != 0x0)
 	{
-		std::string nodeValue = node->value();
-		regexPriceFind(nodeValue);
+		value.clear();
 
+		//Node name doesn't matter here...
+		value.emplace_back(node->value());
+
+		//Unfortunately I'm using goto to keep it similar to below case
+		//    where goto is mandatory to break the loop
+		//    because I'd rather keep this as one function
+
+		//We must loop through all the attributes
 		for (rapidxml::xml_attribute<> *attr = node->first_attribute();attr; attr = attr->next_attribute())
 		{
-			std::string atrValue = attr->value();
-			regexPriceFind(atrValue);
-
-			if (verbose)
-				std::cout << "Node attribute is: " << atrValue << '\n';
+			value.emplace_back(attr->value());
 		}
+
+		regexPriceFind();
+
+		if (betterPrice == true)
+			return;
 
 		//Recurse children
 		// '0' is requred because rapidXML will occassionally interpret NULL as 0
@@ -105,107 +123,44 @@ void parse::parseXML(rapidxml::xml_node<> *node, bool verbose)
 	}
 
 	if (verbose)						
-		std::cout << "Reached Null Node!" << '\n';
-
-	return;
-}
-
-
-std::vector<std::string> parse::loadHTML()
-{
-	//Get list of possible places price might be located in the HTML document
-	std::ifstream inputFile ("../http_search_list.txt");
-
-	std::vector<std::string> whitelist;
-	std::string helper;
-
-	while (inputFile >> helper)
-	{
-		inputFile >> helper;
-		whitelist.emplace_back(helper);
-	}
-
-	inputFile.close();
-
-	return whitelist;
-}
-
-
-//Code is very similar to parseXML
-//	we simply have to check our whitelist before proceeding
-void parse::parseHTML(std::vector<std::string>& whitelist, rapidxml::xml_node<> *node, bool verbose)
-{
-	if (betterPrice == true)
-		return;
-
-	//Keep recursing while the node is present
-	while (*node->name() != 0x0)
-	{
-		//Node name doesn't matter here...
-		std::string nodeValue = node->value();
-		regexPriceFind(nodeValue);
-
-		//Attribute does
-		for (rapidxml::xml_attribute<> *attr = node->first_attribute();attr; attr = attr->next_attribute())
-		{
-			std::string atrValue = attr->value();
-
-			//This block is the only block that is different between parseHTML and parseXML
-			for (short i = 0; i < whitelist.size(); ++i)
-			{
-				if (atrValue.compare(whitelist[i]));
-				{
-					regexPriceFind(atrValue);
-					break;
-				}
-			}
-
-			if (verbose)
-				std::cout << "Node attribute is: " << atrValue << "\n";
-		}
-
-		//Recurse children
-		// '0' is requred because rapidXML will occassionally interpret NULL as 0
-		if (node->first_node() != 0x0 || node->first_node() != 0)
-			parseHTML(whitelist, node->first_node(), verbose);
-		
-		//Recurse siblings
-		// '0' is requred because rapidXML will occassionally interpret NULL as 0	
-		if (node->next_sibling() != 0x0 || node->next_sibling() != 0)
-			parseHTML(whitelist, node->next_sibling(), verbose);
-
-		return;
-	}
-
-	if (verbose)						
 		std::cout << "Reached Null Node!" << "\n";
 
 	return;
 }
 
 
-void parse::regexPriceFind(std::string& str)
+bool parse::regexPriceFind()
 {
 
 	//Find price in our string using regex
 	//As long as the dollar tag is present we can identify price
 	//REMEMBER: to double backslashes, a single backslash is an esc. char
-	std::smatch matchPrice;
-	bool present = std::regex_search(str, matchPrice, std::regex("\\$\\d+"));
-
-	if (present == false)
-		return;
-
-	//Convert match to number
-	std::string stringmPrice = matchPrice.str();
-	stringmPrice.erase(0,1);
-	int foundPrice = atoi(stringmPrice.c_str());
-
-	if (foundPrice < price)
+	for (short i = 0; i < value.size(); ++i)
 	{
-		betterPrice = true;
-		return;
+		for (short j = 0; j < whitelist.size(); ++j)
+		{
+			if (value[i].compare(whitelist[i]));
+			{
+				std::smatch matchPrice;
+				present = std::regex_search(value[i], matchPrice, std::regex("\\$\\d+"));
+
+				//If no number is present we don't need to compare the number
+				if (present == false)
+					return false;
+
+				//Convert match to number
+				helper = matchPrice.str();
+				helper.erase(0,1);
+				foundPrice = atoi(helper.c_str());
+
+				if (foundPrice < price)
+				{
+					betterPrice = true;
+					return true;
+				}
+			}
+		}
 	}
 
-	return;
+	return false;
 }

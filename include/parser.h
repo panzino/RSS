@@ -15,19 +15,34 @@ class parse
 {
 
 private:
+	std::vector<std::string> whitelist;
+	std::vector<std::string> value;
+	std::string helper;
 	int price;
+	int foundPrice;
 	bool betterPrice;
-
-public:
-	//Requires: the map holding our settings from settings.txt
-	//Modifies: the map holding our settings
-	//Effects: parses XML setting
-	bool startParse(const char* extension, int priceIn, bool verbose);
+	bool present;
 
 	//Requires: the top node
 	//Modifies: nothing
 	//Effects: traverses the RSS nodes
 	void parseXML(rapidxml::xml_node<> *node, bool verbose);
+
+	//Requires: the price of the item
+	//Modifies: nothing
+	//Effects: searches the parsed strings for the dollar value
+	bool regexPriceFind();
+
+public:
+	parse()
+	{
+		whitelist = {};
+		value = {};
+		helper = "";
+		price = 0;
+		betterPrice = false;
+		present = false;
+	}
 
 	//Requires: nothing
 	//Modifies: vector<string> 
@@ -36,20 +51,12 @@ public:
 	//We cannot use our trivial solution of just using a Regex
 	//	because the $ symbol is rather common in HTML and leads
 	//	to a lot of false positives
-	//IF I really wanted to I could make the vector<string>
-	//	a member of the class....
-	std::vector<std::string> loadHTML();
-
-	//Requires: the top node
-	//Modifies: nothing
-	//Effects: traverses the HTML that is converted to XML
-	//			by fixer.cpp
-	void parseHTML(std::vector<std::string>& whitelist, rapidxml::xml_node<> *node, bool verbose);
-
-	//Requires: the price of the item
-	//Modifies: nothing
-	//Effects: searches the parsed strings for the dollar value
-	void regexPriceFind(std::string& str);
+	void loadHTML();
+	
+	//Requires: the map holding our settings from settings.txt
+	//Modifies: the map holding our settings
+	//Effects: parses XML setting
+	bool startParse(const char* extension, int priceIn, bool verbose);
 };
 
 
