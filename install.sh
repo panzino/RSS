@@ -50,9 +50,9 @@ read password
 echo "Please enter an email address to send email to"
 read to
 
-export FROM=from
-export RSSPass=password
-export TO=to
+echo "FROM=" $(from) >> /etc/environment
+echo "RSSPass=" $(password) >> /etc/environment
+echo "TO=" $(to) >> /etc/environment
 
 echo "Set up complete!"
 #------------------------------------------------------
