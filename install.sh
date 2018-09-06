@@ -44,15 +44,15 @@ echo " * * * *" $(logname)  "/etc/cron.hourly/run.sh" >> crontab
 
 #4. User entered email information
 echo "Please enter a gmail account to send email from"
-read from
+read fromEmail
 echo "Please enter the password for the gmail account"
-read password
+read passwordEmail
 echo "Please enter an email address to send email to"
-read to
+read toEmail
 
-echo "FROM=" $(from) >> /etc/environment
-echo "RSSPass=" $(password) >> /etc/environment
-echo "TO=" $(to) >> /etc/environment
+echo "FROM=$fromEmail" >> /etc/environment
+echo "RSSPass=$passwordEmail" >> /etc/environment
+echo "TO=$toEmail" >> /etc/environment
 
 echo "Set up complete!"
 #------------------------------------------------------
