@@ -54,6 +54,16 @@ echo "FROM=$fromEmail" >> /etc/environment
 echo "RSSPass=$passwordEmail" >> /etc/environment
 echo "TO=$toEmail" >> /etc/environment
 
+
+#I'd like to apologize for the below solution...
+#    I couldn't find a way of using a C++ macro and drawing the 
+#    environment variable into the preexisting code
+echo "#define FROM \"< $fromEmail >\"" | cat - /home/$(logname)/price_tracker/src/email.cpp > temp && mv temp /home/$(logname)/price_tracker/src/email.cpp
+echo "#define TO \"< $toEmail >\"" | cat - /home/$(logname)/price_tracker/src/email.cpp > temp && mv temp /home/$(logname)/price_tracker/src/email.cpp
+echo "#define CC \"< $toEmail >\"" | cat - /home/$(logname)/price_tracker/src/email.cpp > temp && mv temp /home/$(logname)/price_tracker/src/email.cpp
+
+
+
 echo "Set up complete!"
 #------------------------------------------------------
 
