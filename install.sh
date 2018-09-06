@@ -41,3 +41,19 @@ cd /etc
 echo -n $(shuf -i 0-60 -n 1) >> crontab
 echo " * * * *" $(logname)  "/etc/cron.hourly/run.sh" >> crontab
 #------------------------------------------------------
+
+#4. User entered email information
+echo "Please enter a gmail account to send email from"
+read from
+echo "Please enter the password for the gmail account"
+read password
+echo "Please enter an email address to send email to"
+read to
+
+export FROM=from
+export RSSPass=password
+export TO=to
+
+echo "Set up complete!"
+#------------------------------------------------------
+

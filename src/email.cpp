@@ -32,9 +32,9 @@
 #include <string>
 #include <vector>
 
-#define FROM    "<rssmailbot@gmail.com>"
-#define TO      "<daniel.nara@outlook.com>"
-#define CC      "<daniel.nara@outlook.com>"
+#define FROM    getenv("FROM")
+#define TO      getenv("TO")
+#define CC      getenv("TO")
 
  
 //This creates a vector<string> because payload_source calls
@@ -49,9 +49,9 @@ std::vector<const char*> formatMessage(std::vector<settings>& map, std::vector<s
     std::vector<const char*> message;
     message.reserve(10);
     message.emplace_back("Date: Mon, 16 April 2018 14:52:29 +1100\r\n");
-    message.emplace_back("To: " TO "\r\n");
-    message.emplace_back("From: " FROM " (Mail Bot)\r\n");
-    message.emplace_back("Cc: " CC " (Placeholder)\r\n");
+    message.emplace_back("To: <" TO ">\r\n");
+    message.emplace_back("From: <" FROM "> (Mail Bot)\r\n");
+    message.emplace_back("Cc: <" CC "> (Placeholder)\r\n");
     message.emplace_back("Message-ID: <dcd7cb36-11db-487a-9f3a-e652a9458efd@rssmailbot@gmail.com>\r\n");
     message.emplace_back("Subject: Price Alert!\r\n");
     //empty line to divide headers from body, see RFC5322
@@ -132,7 +132,7 @@ void sendEmail(std::vector<settings>& map, std::vector<short>& send, bool verbos
     {
 
       // Set username and password 
-      curl_easy_setopt(curl, CURLOPT_USERNAME, "rssmailbot@gmail.com");
+      curl_easy_setopt(curl, CURLOPT_USERNAME, getenv("FROM"));
       curl_easy_setopt(curl, CURLOPT_PASSWORD, getenv("RSSPass"));
 
       // This is the URL for your mailserver
