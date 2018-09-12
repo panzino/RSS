@@ -142,7 +142,7 @@ ___
 ## Known Problems
 
 * Problematic Websites: Walmart
-* Any website displaying price using javascript
+* Website using javascript to display price
 
 
 [100]: settings.txt
