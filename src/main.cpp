@@ -3,18 +3,20 @@
 #include "fixer.h"
 #include "parser.h"
 #include "email.h"
+#include <time.h>
+#include <unistd.h>
 #include <getopt.h>
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-
 //Struct for getops_long
 static struct option longopts[] = 
 {
     {"help", no_argument, nullptr, 'h'},
     {"verbose", no_argument, nullptr, 'v'},
+    {"run", no_argument, nullptr, 'r'},
     {nullptr, 0, nullptr, 0}
 };
 
@@ -58,6 +60,21 @@ int main(int argc, char *argv[])
     //////////////END GETOPS ///////////
     ////////////////////////////////////
 
+//Timing procedure
+clock_t t;
+
+clock_t GET_time;
+GET_time = 0;
+
+clock_t TIDY_time;
+TIDY_time = 0; 
+
+clock_t PARSE_time;
+PARSE_time = 0;
+
+clock_t EMAIL_time;
+EMAIL_time = 0;
+
     //Now we run the program
 
     //1. GET SETTINGS
@@ -65,8 +82,12 @@ int main(int argc, char *argv[])
     //TODO: Rewrite the settings importation code to work with Boost.program_options
     //TODO: OR rewrite the code so it's prettier
 
+t = clock();
+
     vector<settings> map;
     readSettings(map);
+
+cout << "Send time is: " << (float)(clock() - t)/CLOCKS_PER_SEC << endl;
 
     //Cache our responses so we only send one email
     //Execute tracks if we need to send an email
@@ -74,35 +95,64 @@ int main(int argc, char *argv[])
     bool execute = false;
     vector<short> send;
 
+    //Initialize variables
+    parse start = parse();
+    start.loadHTML();
+
+    //Now we loop through all the selected items and their search URL
     for (unsigned short i = 0; i < map.size(); ++i)
     {
         const char* ext = (map[i].ext).c_str();
 
-        //2. GET RSS XML FILES
+t = clock();
+
+        //2. GET FILES
         //FROM: http
         //TODO: Refactor code from C to C++
-        //sendGET((map[i].url).c_str(), ext, verbose);
+        sendGET((map[i].url).c_str(), verbose);
+
+//Get time
+GET_time += clock() - t;
+t = clock();
+
 
         //2.b FIX POSSIBLE FORMATTING FROM GET RESPONSES
         //FROM: tidy
-        //fixFormatting(verbose);
+        //NOTE: Vestigial from old XML/HTML parsing code
+        //      Will be needed again if I re-enable XML parsing
+        fixFormatting(verbose);
 
-        //3. PARSE THE XML FILES
+//Formatting time
+TIDY_time += clock() - t;
+t = clock();
+
+        //3. PARSE THE FILES
         //FROM: xmlparser
-        //TODO: write a quicker string parser for small files
-        parse start = parse();
         send.push_back(start.startParse(ext, map[i].price, verbose));
 
-        execute += send[i];
+//Parse time
+PARSE_time += clock() - t;
+t = clock();
 
+        execute += send[i];
         cout << flush;
     }
+
+t = clock();
 
     //4. IF REQUIRED- SEND EMAIL
     //FROM: sendemail
     //TODO: Refactor code from C to C++
     if (execute)
         sendEmail(map, send, verbose);
+
+//Email time
+cout << "Email time is: " << (float)(clock() - t)/CLOCKS_PER_SEC << endl;
+cout << "GET time is: " << (float)GET_time/CLOCKS_PER_SEC << endl;
+cout << "Tidy time is: " << (float)TIDY_time/CLOCKS_PER_SEC << endl;
+cout << "Parse time is: " << (float)PARSE_time/CLOCKS_PER_SEC << endl;
+
+
 
     return 0;
 }
