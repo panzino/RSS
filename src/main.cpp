@@ -3,6 +3,7 @@
 #include "fixer.h"
 #include "parser.h"
 #include "email.h"
+#include <unistd.h>
 #include <getopt.h>
 #include <iostream>
 #include <string>
@@ -15,6 +16,7 @@ static struct option longopts[] =
 {
     {"help", no_argument, nullptr, 'h'},
     {"verbose", no_argument, nullptr, 'v'},
+    {"run", no_argument, nullptr, 'r'},
     {nullptr, 0, nullptr, 0}
 };
 
@@ -58,13 +60,13 @@ int main(int argc, char *argv[])
     //////////////END GETOPS ///////////
     ////////////////////////////////////
 
+
     //Now we run the program
 
     //1. GET SETTINGS
     //FROM: readops and settings.txt
     //TODO: Rewrite the settings importation code to work with Boost.program_options
     //TODO: OR rewrite the code so it's prettier
-
     vector<settings> map;
     readSettings(map);
 
@@ -74,27 +76,31 @@ int main(int argc, char *argv[])
     bool execute = false;
     vector<short> send;
 
+    //Initialize variables
+    parse start = parse();
+    start.loadHTML();
+
+    //Now we loop through all the selected items and their search URL
     for (unsigned short i = 0; i < map.size(); ++i)
     {
         const char* ext = (map[i].ext).c_str();
 
-        //2. GET RSS XML FILES
+        //2. GET FILES
         //FROM: http
         //TODO: Refactor code from C to C++
-        //sendGET((map[i].url).c_str(), ext, verbose);
+        sendGET((map[i].url).c_str(), verbose);
 
         //2.b FIX POSSIBLE FORMATTING FROM GET RESPONSES
         //FROM: tidy
-        //fixFormatting(verbose);
+        //NOTE: Vestigial from old XML/HTML parsing code
+        //      Will be needed again if I re-enable XML parsing
+        fixFormatting(verbose);
 
-        //3. PARSE THE XML FILES
+        //3. PARSE THE FILES
         //FROM: xmlparser
-        //TODO: write a quicker string parser for small files
-        parse start = parse();
-        send.push_back(start.startParse(ext, map[i].price, verbose));
+        send.push_back(start.startStringParse(ext, map[i].price, verbose));
 
         execute += send[i];
-
         cout << flush;
     }
 

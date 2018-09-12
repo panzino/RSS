@@ -97,45 +97,6 @@ $(TAR): $(TAR)
 # shortcut for making tarball
 tarball: $(TAR)
 
-define MAKEFILE_HELP
-EECS281 Advanced Makefile Help
-* This Makefile uses advanced techniques, for more information:
-    $$ man make
-
-* General usage
-    1. Follow directions at each "TODO" in this file.
-       a. Set EXECUTABLE equal to the name given in the project specification.
-       b. Set PROJECTFILE equal to the name of the source file with main()
-       c. Add any dependency rules specific to your files.
-    2. Build, test, submit... repeat as necessary.
-
-* Preparing submissions
-    A) To build 'partialsubmit.tar.gz', a tarball without tests used to find
-       buggy solutions in the autograder.  This is useful for faster autograder
-       runs during development and free submissions if the project does not
-       build.
-           $$ make partialsubmit
-    B) Build 'fullsubmit.tar.gz' a tarball complete with autograder test cases.
-       ALWAYS USE THIS FOR FINAL GRADING!  It is also useful when trying to
-       find buggy solutions in the autograder.
-           $$ make fullsubmit
-
-* Unit testing support
-    A) Source files for unit testing should be named test*.cpp.  Examples
-       include test_input.cpp or test3.cpp.
-    B) Automatic build rules are generated to support the following:
-           $$ make test_input
-           $$ make test3
-           $$ make alltests        (this builds all test drivers)
-    C) If test drivers need special dependencies, they must be added manually.
-    D) IMPORTANT: NO SOURCE FILES THAT BEGIN WITH test WILL BE ADDED TO ANY
-       SUBMISSION TARBALLS.
-endef
-export MAKEFILE_HELP
-
-help:
-	@echo "$$MAKEFILE_HELP"
-
 #######################
 # TODO (begin) #
 #######################

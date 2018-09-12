@@ -6,9 +6,6 @@
 #include <string>
 #include <unordered_map>
 #include <fstream>
-#include <rapidxml.hpp>
-#include <rapidxml_print.hpp>
-#include <rapidxml_utils.hpp>
 #include <stdio.h>
 #include <curl/curl.h>
 

@@ -19,10 +19,6 @@ cmake ../.. -DCMAKE_BUILD_TYPE=Release
 make
 sudo make install
 
-#Install rapidxml
-apt-get install librapidxml-dev
-cd /usr/include/rapidxml
-mv rapid* /usr/local/include
 #------------------------------------------------------
 
 #2. Make RSS source code
@@ -50,7 +46,7 @@ read passwordEmail
 echo "Please enter an email address to send email to"
 read toEmail
 
-echo "FROM=$fromEmail" >> /etc/environment
+echo "FROM_2=$fromEmail" >> /etc/environment
 echo "RSSPass=$passwordEmail" >> /etc/environment
 echo "TO=$toEmail" >> /etc/environment
 

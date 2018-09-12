@@ -1,6 +1,5 @@
 Amazon: a-size-base a-color-base a-offscreen
 Ebay: s-item__price
 Walmart: aria-label
-Ledger: data-price
 Craigslist: result-price
 Rockauto: dprice[3][v]

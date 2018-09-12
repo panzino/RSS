@@ -137,7 +137,6 @@ ___
 
   - [Tidy-HTML5][110]  
   - [Curl][115]  
-  - [Rapidxml][120]  
 
 ___
 ## Known Problems
@@ -150,5 +149,4 @@ ___
 [105]: http_search_list.txt
 [110]: https://github.com/htacg/tidy-html5
 [115]: https://github.com/curl/curl
-[120]: http://rapidxml.sourceforge.net/manual.html
-[200]: responses/amazon_light_bulb_example.html
+[200]: responses/examples/amazon_example.html
