@@ -1,5 +1,4 @@
-## RSS Makefile
-## COPIED FROM SCHOOL PROJECT W/ CHANGES. HOPEFULLY IT WORKS
+## Makefile
 
 # The main driver of the project
 EXECUTABLE 	= RSS
@@ -18,7 +17,7 @@ SOURCES     := $(filter-out $(TESTSOURCES), $(SOURCES))
 # list of objects used in project
 OBJECTS		= $(SOURCES:%.cpp=$(ODIR)/%.o)
 
-# If main() is in another file delete the line above, edit and uncomment below
+# Name of main()
 PROJECTFILE = main.cpp
 
 # If we want to make a tarball of this directory

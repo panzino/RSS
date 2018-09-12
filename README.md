@@ -129,6 +129,8 @@ ___
 
 1. 6/19/2018  
    Software and test-suite are functional but not user-friendly. Future versions will aim to increase usability
+2. 9/12/2018
+   Changed parser to string implementation, fixed install script, various bug fixes & performance improvements
 
 ___
 ## Dependencies
@@ -136,6 +138,12 @@ ___
   - [Tidy-HTML5][110]  
   - [Curl][115]  
   - [Rapidxml][120]  
+
+___
+## Known Problems
+
+* Problematic Websites: Walmart
+* Any website displaying price using javascript
 
 
 [100]: settings.txt
