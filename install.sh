@@ -24,6 +24,9 @@ sudo make install
 #2. Create cron job
 sudo apt-get install cron
 cd ..
+cd ..
+cd ..
+cd price_tracker
 mv run.sh /etc/cron.hourly
 cd /etc
 echo -n $(shuf -i 0-60 -n 1) >> crontab
@@ -52,10 +55,7 @@ echo "#define CC \"< $toEmail >\"" | cat - /home/$(logname)/price_tracker/src/em
 #------------------------------------------------------
 
 #2. Make RSS source code
-cd ..
-cd ..
-cd ..
-cd price_tracker/src
+cd ~/price_tracker/src
 mkdir obj
 make
 #------------------------------------------------------
