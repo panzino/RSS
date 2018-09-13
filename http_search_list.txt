@@ -1,4 +1,7 @@
-Amazon: a-size-base a-color-base a-offscreen
+Amazon: a-size-base
+Amazon: a-color-base
+Amazon: a-offscreen
+Ebay: bold
 Ebay: s-item__price
 Walmart: aria-label
 Craigslist: result-price
