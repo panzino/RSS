@@ -21,15 +21,7 @@ sudo make install
 
 #------------------------------------------------------
 
-#2. Make RSS source code
-cd ..
-cd ..
-cd ..
-cd price_tracker/src
-make
-#------------------------------------------------------
-
-#3. Create cron job
+#2. Create cron job
 sudo apt-get install cron
 cd ..
 mv run.sh /etc/cron.hourly
@@ -38,7 +30,7 @@ echo -n $(shuf -i 0-60 -n 1) >> crontab
 echo " * * * *" $(logname)  "/etc/cron.hourly/run.sh" >> crontab
 #------------------------------------------------------
 
-#4. User entered email information
+#3. User entered email information
 echo "Please enter a gmail account to send email from"
 read fromEmail
 echo "Please enter the password for the gmail account"
@@ -57,8 +49,16 @@ echo "TO=$toEmail" >> /etc/environment
 echo "#define FROM \"< $fromEmail >\"" | cat - /home/$(logname)/price_tracker/src/email.cpp > temp && mv temp /home/$(logname)/price_tracker/src/email.cpp
 echo "#define TO \"< $toEmail >\"" | cat - /home/$(logname)/price_tracker/src/email.cpp > temp && mv temp /home/$(logname)/price_tracker/src/email.cpp
 echo "#define CC \"< $toEmail >\"" | cat - /home/$(logname)/price_tracker/src/email.cpp > temp && mv temp /home/$(logname)/price_tracker/src/email.cpp
+#------------------------------------------------------
 
-
+#2. Make RSS source code
+cd ..
+cd ..
+cd ..
+cd price_tracker/src
+mkdir obj
+make
+#------------------------------------------------------
 
 echo "Set up complete!"
 #------------------------------------------------------

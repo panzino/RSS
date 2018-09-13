@@ -7,11 +7,11 @@ ___
 
 1. Download the latest source from the Git server: 
 	```
-   git clone https://github.com/panzino/RSS.git
+   git clone https://github.com/panzino/price_tracker.git
 	```
 2. Enter RSS source directory:
 	```
-   cd RSS
+   cd price_tracker
 	```
 3. Change install script permission:
 	```
@@ -33,7 +33,6 @@ ___
    -cron  
    -curl  
    -tidy-html5  
-   -rapidxml  
 
 3. Currently, RSS is automatically configured to run once per hour. 
 
@@ -131,7 +130,7 @@ ___
 
 1. 6/19/2018  
    Software and test-suite are functional but not user-friendly. Future versions will aim to increase usability
-2. 9/12/2018
+2. 9/12/2018  
    Changed parser to string implementation, fixed install script, various bug fixes & performance improvements
 
 ___
