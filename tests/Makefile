@@ -12,6 +12,7 @@ SOURCES 	= $(wildcard *.cpp)
 SOURCES += http.cpp
 SOURCES += readops.cpp
 SOURCES += parser.cpp
+SOURCES += fixer.cpp
 
 # list of objects used in project
 OBJECTS	= $(SOURCES:%.cpp=$(ODIR)/%.o)
@@ -69,6 +70,9 @@ $(ODIR)/parser.o: $(SDIR)/parser.cpp
 
 $(ODIR)/readops.o: $(SDIR)/readops.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $(SDIR)/readops.cpp
+
+$(ODIR)/fixer.o: $(SDIR)/fixer.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@ $(SDIR)/fixer.cpp
 
 # make clean - remove .o files, executables, tarball
 clean:

@@ -83,8 +83,6 @@ int main(int argc, char *argv[])
     //Now we loop through all the selected items and their search URL
     for (unsigned short i = 0; i < map.size(); ++i)
     {
-        const char* ext = (map[i].ext).c_str();
-
         //2. GET FILES
         //FROM: http
         //TODO: Refactor code from C to C++
@@ -98,7 +96,7 @@ int main(int argc, char *argv[])
 
         //3. PARSE THE FILES
         //FROM: xmlparser
-        send.push_back(start.startStringParse(ext, map[i].price, verbose));
+        send.push_back(start.startStringParse(map[i].price, verbose));
 
         execute += send[i];
         cout << flush;

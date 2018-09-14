@@ -36,7 +36,7 @@ void parse::loadHTML()
 }
 
 
-bool parse::startStringParse(const char* extension, int priceIn, bool verbose)
+bool parse::startStringParse(int priceIn, bool verbose)
 {
 	price = priceIn;
 

@@ -70,14 +70,14 @@ void test_readops()
 
 	vector<settings> read_test;
 
-	string url = "https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564396%20600006157&IsNodeId=1&ShowDeactivatedMark=False";
-    string item = "1600";
-    int price = 1000;
+	string url = "https://www.amazon.com/s?url=search-alias%3Daps&field-keywords=light+bulbs";
+	string item = "light_bulbs";
+    int price = 20;
 
     read_test.emplace_back(settings(url, item, price));
 
-    url = "https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564395&IsNodeId=1&ShowDeactivatedMark=False";
-    item = "1866";
+    url = "https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564396%20600006157&IsNodeId=1&ShowDeactivatedMark=False";
+    item = "1600";
     price = 100;
 
     read_test.emplace_back(settings(url,item,price));

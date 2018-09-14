@@ -21,7 +21,6 @@ void readSettings(vector<settings>& map)
 	string temp;
 	string url;
 	string item;
-	string ext;
 	int price;
 
 	ifstream settingsFile("../settings.txt");
@@ -40,11 +39,9 @@ void readSettings(vector<settings>& map)
 		settingsFile >> temp >> temp;
 		settingsFile >> item;
 		settingsFile >> temp >> temp;
-		settingsFile >> ext;
-		settingsFile >> temp >> temp;
 		settingsFile >> price;
 
-		map.emplace_back(settings(url, item, ext, price));
+		map.emplace_back(settings(url, item, price));
 	}
 
 	return;

@@ -36,7 +36,7 @@ public:
 	//Requires: the input file
 	//Modifies: nothing
 	//Effects: parses as a string
-	bool startStringParse(const char* extension, int priceIn, bool verbose);
+	bool startStringParse(int priceIn, bool verbose);
 };
 
 

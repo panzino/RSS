@@ -41,13 +41,12 @@ void test_http()
 	cerr << "STARTING HTTP TESTING" << '\n';
 
 	//Send GET request to webpage that doesn't change frequently
-	string url = "https://www.refinedshave.com/about/";
+	string url = "http://home.mcom.com/home/welcome.html";
 
-	char extension[6] = ".html";
-	sendGET(url.c_str(), extension, 0);
+	sendGET(url.c_str(), false);
 
-	string fileGrabbed = "../responses/output.html";
-	string fileStatic = "../responses/test_response.html";
+	string fileGrabbed = "../responses/GET_response.txt";
+	string fileStatic = "../responses/examples/HTTP_test.html";
 
 	bool failed = compareFiles(fileGrabbed, fileStatic);
 

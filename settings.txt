@@ -1,11 +1,9 @@
-[2]
+2
 [feedOne]
 url = https://www.amazon.com/s?url=search-alias%3Daps&field-keywords=light+bulbs
 item = light_bulbs
-ext = html
 price = 20
 [feedTwo]
 url = https://www.newegg.com/Product/RSS.aspx?Submit=Property&N=100007609%20600006178%20600213067%20600564396%20600006157&IsNodeId=1&ShowDeactivatedMark=False
 item = 1600
-ext = xml
-price = 1000
+price = 100

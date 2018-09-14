@@ -108,7 +108,7 @@ This file designates where to look in the HTML webpages of URLs you are price wa
    *4* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Ebay: s-item__price   
    *5* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Walmart: aria-label  
 
-Look through the source file [here][200] for a product that costs $12.99. You will find it next to an HTML tag named *a-offscreen*. Therefore, you must add that tag to this file in the appropriately named category. This tells the RSS source code where to look for the price tag in the HTML from Amazon. To add a different website follow the formatting in this file. Multiple tags each need their own line
+Look through the source file [here][200] for a product that costs $5.99. You will find it next to an HTML tag named *a-offscreen*. Therefore, you must add that tag to this file in the appropriately named category. This tells the RSS source code where to look for the price tag in the HTML from Amazon. To add a different website follow the formatting in this file. Multiple tags each need their own line
 
 ### other files
 
